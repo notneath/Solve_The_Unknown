@@ -1,0 +1,411 @@
+/* General page styling */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, Arial, sans-serif;
+    background-color: #f4f3ef;
+    color: #222;
+}
+
+/* Main container */
+.container {
+    padding: 35px;
+}
+
+h1 {
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+
+/* Start screen card */
+.start-card {
+    width: 100%;
+    max-width: 600px;
+    margin: 55px auto;
+    padding: 16px;
+    background-color: white;
+    border: 2px solid #444;
+    border-radius: 9px;
+}
+
+.start-card h2 {
+    margin-top: 0;
+    font-size: 17px;
+}
+
+.story {
+    color: #666;
+    margin-bottom: 18px;
+}
+
+.story p {
+    font-size: 13px;
+}
+
+/* Difficulty */
+.difficulty-mode {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+h3 {
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.difficulty-btn {
+    background-color: white;
+    color: black;
+    border: 2px solid #444;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+/* Selected difficulty button */
+.difficulty-btn.active {
+    background-color: #222;
+    color: white;
+}
+.difficulty-btn:hover {
+    background-color: #444;
+    color: white;
+}
+
+/* Solo and Team buttons */
+.mode-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+button {
+    font-size: 16px;
+    padding: 12px;
+    border: 2px solid #444;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.mode-btn {
+    background-color: white;
+    color: black;
+}
+
+.mode-btn.active {
+    background-color: #222;
+    color: white;
+}
+
+.mode-btn:hover {
+    background-color: #444;
+    color: white;
+}
+
+/* Input fields */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+input,
+textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #444;
+    border-radius: 6px;
+}
+
+/* Main buttons */
+.main-btn,
+.secondary-btn {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.main-btn {
+    background-color: #222;
+    color: white;
+}
+
+.secondary-btn {
+    background-color: white;
+    color: black;
+}
+
+#open-case-btn:hover {
+    background-color: #444;
+    color: white;
+}
+
+/* Website responsive design */
+@media (max-width: 600px) {
+
+    .container {
+        padding: 18px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .start-card {
+        margin: 40px auto;
+    }
+
+}
+
+
+/* Hide screens that are not active */
+.hidden {
+    display: none !important;
+}
+
+/* Case Introduction Screen */
+.case-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.case-header h1 {
+    letter-spacing: 3px;
+}
+
+.case-header p {
+    color: #777;
+    letter-spacing: 2px;
+}
+
+/* Case information card */
+.case-card {
+    background-color: white;
+    border: 2px solid #444;
+    border-radius: 9px;
+
+    width: 100%;
+    max-width: 800px;
+
+    margin: auto;
+    padding: 30px;
+}
+
+.case-card h2 {
+    font-size: 30px;
+}
+
+.case-description {
+    line-height: 1.7;
+    color: #555;
+}
+
+.case-card hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 25px 0;
+}
+
+/* Clue cards */
+.clue {
+    background-color: #f4f3ef;
+    border-left: 5px solid #b58b48;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.clue h4 {
+    margin-top: 0;
+}
+
+.case-card button {
+    margin-top: 15px;
+}
+
+@media (max-width: 600px) {
+
+    .case-card {
+        padding: 18px;
+    }
+
+    .case-card h2 {
+        font-size: 24px;
+    }
+
+}
+
+
+/* Game Header */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.game-header h1 {
+    font-size: 36px;
+}
+
+.game-status {
+    display: flex;
+    gap: 15px;
+}
+
+.game-status span {
+    border: 2px solid #444;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 18px;
+}
+
+/* Navigation */
+.game-navigation {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background: white;
+    color: black;
+}
+
+.tab-btn.active {
+    background: #222;
+    color: white;
+}
+
+/* Case Summary and Victim */
+.case-layout {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr;
+    gap: 20px;
+}
+
+.dashboard-panel {
+    background: white;
+    border: 2px solid #444;
+    border-radius: 9px;
+    padding: 20px;
+}
+
+.summary-placeholder {
+    min-height: 100px;
+    background: #dededb;
+    margin: 15px 0;
+    padding: 15px;
+}
+
+.victim-avatar {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Suspect Cards */
+#suspects-section {
+    margin-top: 25px;
+}
+
+.suspect-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.suspect-card {
+    background: white;
+    border: 2px solid #444;
+    border-radius: 9px;
+    padding: 20px;
+    text-align: center;
+}
+
+.suspect-card img {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+}
+
+.suspect-card button {
+    background: white;
+    color: black;
+}
+
+/* Evidence Drawer */
+.evidence-drawer {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    max-width: 85%;
+    height: 100vh;
+    background: white;
+    padding: 25px;
+    z-index: 1001;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+}
+
+.evidence-drawer.open {
+    right: 0;
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.drawer-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+}
+
+.drawer-overlay.open {
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .suspect-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .case-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 550px) {
+    .suspect-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .game-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+

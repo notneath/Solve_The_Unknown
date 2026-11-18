@@ -1,11 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Solve the Unknown</title>
+
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <h1>HELLOOO</h1>
+
+    <main class="container">
+
+        <section id="start-screen" class="screen">
+
+        <h1>Solve the Unknown</h1>
+
+        <div class="start-card">
+
+            <h2>Detective, take the case.</h2>
+
+            <p class="story">
+                Short story hook goes here.
+            </p>
+
+
+            <!-- Difficulty -->
+            <h3>Choose Difficulty</h3>
+            <div class="difficulty-mode">
+
+                <button id="easy-btn" class="difficulty-btn active">
+                    Easy
+                </button>
+                <button id="medium-btn" class="difficulty-btn">
+                    Medium
+                </button>
+                <button id="hard-btn" class="difficulty-btn">
+                    Hard
+                </button>
+
+            </div>
+
+            <!-- Game Mode -->
+            <h3>Choose Game Mode</h3>
+            <div class="mode-buttons">
+
+                <button id="solo-btn" class="mode-btn active">
+                    Solo
+                </button>
+
+                <button id="team-btn" class="mode-btn">
+                    Team
+                </button>
+
+            </div>
+
+            <!-- Player Name -->
+            <div class="form-group">
+
+                <label for="player-name">
+                    Your name or team name
+                </label>
+
+                <input
+                    type="text"
+                    id="player-name"
+                >
+
+            </div>
+
+            <!-- Teammate Names -->
+            <div class="form-group" id="teammate-group">
+
+                <label for="teammate-names">
+                    Teammate names (team mode only)
+                </label>
+
+                <input type="text" id="teammate-names" placeholder="Enter names separated by commas">
+
+                <!-- <textarea
+                    id="teammate-names"
+                ></textarea> -->
+
+            </div>
+
+            <!-- Navigation Buttons -->
+            <button id="open-case-btn" class="main-btn">
+                Open the case file
+            </button>
+
+            <button id="leaderboard-btn" class="secondary-btn">
+                Leaderboard
+            </button>
+
+        </div>
+        </section>
+
+
+<!-- Case Introduction Screen -->
+<section id="case-screen" class="screen hidden">
+
+    <div class="case-card">
+
+        <h1>CASE FILE #1</h1>
+
+        <h2>The Midnight Mystery</h2>
+
+        <p>
+            A mysterious incident happened last night.
+            Your job is to investigate the case and
+            discover the truth.
+        </p>
+
+        <h3>Initial Clues</h3>
+
+        <p>Clue 1: A mysterious note was discovered.</p>
+
+        <p>Clue 2: The incident happened around midnight.</p>
+
+        <button id="begin-investigation-btn">
+            Begin Investigation
+        </button>
+
+        <button id="back-btn">
+            Back to Start
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- CASE DASHBOARD -->
+<section id="dashboard-screen" class="screen hidden">
+
+    <!-- Top Header -->
+    <header class="game-header">
+
+        <h1>Solve the Unknown</h1>
+
+        <div class="game-status">
+            <span id="timer">Time 05:00</span>
+            <span>Missions 3 left</span>
+        </div>
+
+        <button id="evidence-btn">
+            Evidence (2)
+        </button>
+
+    </header>
+
+
+    <!-- Navigation Tabs -->
+    <nav class="game-navigation">
+
+        <button class="tab-btn active"
+                onclick="showDashboardSection('case-section', this)">
+            Case file
+        </button>
+
+        <button class="tab-btn"
+                onclick="showDashboardSection('suspects-section', this)">
+            Suspects
+        </button>
+
+        <button class="tab-btn"
+                onclick="showScreen('missions-screen')">
+            Missions
+        </button>
+
+        <button class="tab-btn"
+                onclick="showScreen('accuse-screen')">
+            Accuse
+        </button>
+
+    </nav>
+
+
+    <!-- Case File Section -->
+    <div id="case-section">
+
+        <div class="case-layout">
+
+            <!-- Case Summary -->
+            <div class="dashboard-panel">
+
+                <h2>Case summary</h2>
+
+                <div class="summary-placeholder"
+                     id="dashboard-summary">
+                    The case story will appear here.
+                </div>
+
+                <p>
+                    Victim: <span id="summary-victim">
+                        Robert Anderson
+                    </span>,
+                    age and role.
+                    Where and when it happened.
+                </p>
+
+            </div>
+
+
+            <!-- Victim -->
+            <div class="dashboard-panel">
+
+                <h2>Victim</h2>
+
+                <img
+                    src="https://api.dicebear.com/9.x/adventurer/svg?seed=Robert"
+                    class="victim-avatar"
+                    alt="Victim portrait">
+
+                <p id="victim-details">
+                    Robert Anderson, age and details
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Suspects -->
+        <div id="suspects-section">
+
+            <h2>Suspects</h2>
+
+            <div id="suspect-list" class="suspect-grid">
+                <!-- JavaScript generates suspect cards -->
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Evidence Drawer -->
+    <aside id="evidence-drawer" class="evidence-drawer">
+
+        <div class="drawer-header">
+            <h2>Evidence (2)</h2>
+
+            <button id="close-evidence-btn">
+                Close
+            </button>
+        </div>
+
+        <div class="clue">
+            <h3>Evidence 01</h3>
+            <p>First clue description.</p>
+        </div>
+
+        <div class="clue">
+            <h3>Evidence 02</h3>
+            <p>Second clue description.</p>
+        </div>
+
+    </aside>
+
+    <div id="drawer-overlay" class="drawer-overlay"></div>
+
+</section>
+
+
+
+    </main>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
