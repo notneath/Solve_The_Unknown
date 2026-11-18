@@ -1,268 +1,268 @@
 
-// Get the buttons
-const soloBtn = document.getElementById("solo-btn");
-const teamBtn = document.getElementById("team-btn");
+// // Get the buttons
+// const soloBtn = document.getElementById("solo-btn");
+// const teamBtn = document.getElementById("team-btn");
 
-// Get the input fields
-const playerName = document.getElementById("player-name");
-const teammateNames = document.getElementById("teammate-names");
-const teammateGroup = document.getElementById("teammate-group");
+// // Get the input fields
+// const playerName = document.getElementById("player-name");
+// const teammateNames = document.getElementById("teammate-names");
+// const teammateGroup = document.getElementById("teammate-group");
 
-// Difficulty buttons
-const easyBtn = document.getElementById("easy-btn");
-const mediumBtn = document.getElementById("medium-btn");
-const hardBtn = document.getElementById("hard-btn");
+// // Difficulty buttons
+// const easyBtn = document.getElementById("easy-btn");
+// const mediumBtn = document.getElementById("medium-btn");
+// const hardBtn = document.getElementById("hard-btn");
 
-// Suspect data
+// // Suspect data
 
-const suspects = [
-    {
-        id: 1,
-        name: "Alex Morgan",
-        occupation: "Business Owner",
-        motive: "Financial disagreement"
-    },
-    {
-        id: 2,
-        name: "Sarah Lee",
-        occupation: "Employee",
-        motive: "Personal conflict"
-    },
-    {
-        id: 3,
-        name: "Daniel Smith",
-        occupation: "Friend",
-        motive: "Unknown"
-    },
-    {
-        id: 4,
-        name: "Emily Brown",
-        occupation: "Assistant",
-        motive: "Unknown"
-    }
-];
+// const suspects = [
+//     {
+//         id: 1,
+//         name: "Alex Morgan",
+//         occupation: "Business Owner",
+//         motive: "Financial disagreement"
+//     },
+//     {
+//         id: 2,
+//         name: "Sarah Lee",
+//         occupation: "Employee",
+//         motive: "Personal conflict"
+//     },
+//     {
+//         id: 3,
+//         name: "Daniel Smith",
+//         occupation: "Friend",
+//         motive: "Unknown"
+//     },
+//     {
+//         id: 4,
+//         name: "Emily Brown",
+//         occupation: "Assistant",
+//         motive: "Unknown"
+//     }
+// ];
 
 
-// Default difficulty
-let difficulty = "easy";
+// // Default difficulty
+// let difficulty = "easy";
 
 
-// Select Easy
-easyBtn.addEventListener("click", function() {
+// // Select Easy
+// easyBtn.addEventListener("click", function() {
 
-    difficulty = "easy";
+//     difficulty = "easy";
 
-    easyBtn.classList.add("active");
-    mediumBtn.classList.remove("active");
-    hardBtn.classList.remove("active");
+//     easyBtn.classList.add("active");
+//     mediumBtn.classList.remove("active");
+//     hardBtn.classList.remove("active");
 
-});
+// });
 
-// Select Medium
-mediumBtn.addEventListener("click", function() {
+// // Select Medium
+// mediumBtn.addEventListener("click", function() {
 
-    difficulty = "medium";
+//     difficulty = "medium";
 
-    mediumBtn.classList.add("active");
-    easyBtn.classList.remove("active");
-    hardBtn.classList.remove("active");
+//     mediumBtn.classList.add("active");
+//     easyBtn.classList.remove("active");
+//     hardBtn.classList.remove("active");
 
-});
+// });
 
-// Select Hard
-hardBtn.addEventListener("click", function() {
+// // Select Hard
+// hardBtn.addEventListener("click", function() {
 
-    difficulty = "hard";
+//     difficulty = "hard";
 
-    hardBtn.classList.add("active");
-    easyBtn.classList.remove("active");
-    mediumBtn.classList.remove("active");
+//     hardBtn.classList.add("active");
+//     easyBtn.classList.remove("active");
+//     mediumBtn.classList.remove("active");
 
-});
+// });
 
 
-// Store selected game mode
-let gameMode = "solo";
+// // Store selected game mode
+// let gameMode = "solo";
 
-// Select Solo Mode
-soloBtn.addEventListener("click", function() {
+// // Select Solo Mode
+// soloBtn.addEventListener("click", function() {
 
-    gameMode = "solo";
+//     gameMode = "solo";
 
-    soloBtn.classList.add("active");
-    teamBtn.classList.remove("active");
+//     soloBtn.classList.add("active");
+//     teamBtn.classList.remove("active");
 
-});
+// });
 
-// Select Team Mode
-teamBtn.addEventListener("click", function() {
+// // Select Team Mode
+// teamBtn.addEventListener("click", function() {
 
-    gameMode = "team";
+//     gameMode = "team";
 
-    teamBtn.classList.add("active");
-    soloBtn.classList.remove("active");
+//     teamBtn.classList.add("active");
+//     soloBtn.classList.remove("active");
 
-});
+// });
 
 
 
-// Open Case File
-document.getElementById("open-case-btn")
-    .addEventListener("click", function() {
+// // Open Case File
+// document.getElementById("open-case-btn")
+//     .addEventListener("click", function() {
 
-        if (playerName.value.trim() === "") {
-            alert("Please enter your name or team name.");
-            return;
-        }
+//         if (playerName.value.trim() === "") {
+//             alert("Please enter your name or team name.");
+//             return;
+//         }
 
-        if (gameMode === "team" &&
-            teammateNames.value.trim() === "") {
+//         if (gameMode === "team" &&
+//             teammateNames.value.trim() === "") {
 
-            alert("Please enter your teammate names.");
-            return;
-        }
+//             alert("Please enter your teammate names.");
+//             return;
+//         }
 
-        // Store player information
-        const playerData = {
-            difficulty: difficulty,
-            mode: gameMode,
-            name: playerName.value,
-            teammates: teammateNames.value
-        };
+//         // Store player information
+//         const playerData = {
+//             difficulty: difficulty,
+//             mode: gameMode,
+//             name: playerName.value,
+//             teammates: teammateNames.value
+//         };
 
-        console.log(playerData);
+//         console.log(playerData);
 
-        showScreen("case-screen");
+//         showScreen("case-screen");
 
-    });
+//     });
 
-// Leaderboard Button
-document.getElementById("leaderboard-btn")
-    .addEventListener("click", function() {
+// // Leaderboard Button
+// document.getElementById("leaderboard-btn")
+//     .addEventListener("click", function() {
 
-        alert("Leaderboard page will be connected later.");
+//         alert("Leaderboard page will be connected later.");
 
-    });
+//     });
 
 
-// Switch between screens
-function showScreen(screenId) {
+// // Switch between screens
+// function showScreen(screenId) {
 
-    // Select all screens
-    const screens =
-        document.querySelectorAll(".screen");
+//     // Select all screens
+//     const screens =
+//         document.querySelectorAll(".screen");
 
-    // Hide all screens
-    screens.forEach(function(screen) {
-        screen.classList.add("hidden");
-    });
+//     // Hide all screens
+//     screens.forEach(function(screen) {
+//         screen.classList.add("hidden");
+//     });
 
-    // Show the selected screen
-    document.getElementById(screenId)
-        .classList.remove("hidden");
+//     // Show the selected screen
+//     document.getElementById(screenId)
+//         .classList.remove("hidden");
 
-}
-// Back to Start Screen
-document.getElementById("back-btn")
-    .addEventListener("click", function() {
+// }
+// // Back to Start Screen
+// document.getElementById("back-btn")
+//     .addEventListener("click", function() {
 
-        showScreen("start-screen");
+//         showScreen("start-screen");
 
-    });
+//     });
 
 
-function displaySuspects() {
+// function displaySuspects() {
 
-    const container =
-        document.getElementById("suspect-list");
+//     const container =
+//         document.getElementById("suspect-list");
 
-    container.innerHTML = "";
+//     container.innerHTML = "";
 
-    suspects.forEach(function(suspect) {
+//     suspects.forEach(function(suspect) {
 
-        const card = document.createElement("div");
+//         const card = document.createElement("div");
 
-        card.classList.add("suspect-card");
+//         card.classList.add("suspect-card");
 
-        const avatar =
-            `https://api.dicebear.com/9.x/adventurer/svg?seed=${encodeURIComponent(suspect.name)}`;
+//         const avatar =
+//             `https://api.dicebear.com/9.x/adventurer/svg?seed=${encodeURIComponent(suspect.name)}`;
 
-        card.innerHTML = `
-            <img src="${avatar}" alt="${suspect.name}">
+//         card.innerHTML = `
+//             <img src="${avatar}" alt="${suspect.name}">
 
-            <h3>${suspect.name}</h3>
+//             <h3>${suspect.name}</h3>
 
-            <p>${suspect.occupation}</p>
+//             <p>${suspect.occupation}</p>
 
-            <p>${suspect.motive}</p>
+//             <p>${suspect.motive}</p>
 
-            <button onclick="viewSuspect(${suspect.id})">
-                View profile
-            </button>
-        `;
+//             <button onclick="viewSuspect(${suspect.id})">
+//                 View profile
+//             </button>
+//         `;
 
-        container.appendChild(card);
+//         container.appendChild(card);
 
-    });
+//     });
 
-}
+// }
 
-// Begin Investigation
-document.getElementById("begin-investigation-btn")
-    .addEventListener("click", function() {
+// // Begin Investigation
+// document.getElementById("begin-investigation-btn")
+//     .addEventListener("click", function() {
 
-        // Generate suspect cards
-        displaySuspects();
+//         // Generate suspect cards
+//         displaySuspects();
 
-        // Open dashboard
-        showScreen("dashboard-screen");
+//         // Open dashboard
+//         showScreen("dashboard-screen");
 
-    });
+//     });
 
 
-// Switch between Case File and Suspects sections
-function showDashboardSection(sectionId, button) {
+// // Switch between Case File and Suspects sections
+// function showDashboardSection(sectionId, button) {
 
-    document.getElementById(sectionId)
-        .scrollIntoView({ behavior: "smooth" });
+//     document.getElementById(sectionId)
+//         .scrollIntoView({ behavior: "smooth" });
 
-    document.querySelectorAll(".tab-btn")
-        .forEach(function(btn) {
-            btn.classList.remove("active");
-        });
+//     document.querySelectorAll(".tab-btn")
+//         .forEach(function(btn) {
+//             btn.classList.remove("active");
+//         });
 
-    button.classList.add("active");
+//     button.classList.add("active");
 
-}
+// }
 
 
-// Open Evidence Drawer
-document.getElementById("evidence-btn")
-    .addEventListener("click", function() {
+// // Open Evidence Drawer
+// document.getElementById("evidence-btn")
+//     .addEventListener("click", function() {
 
-        document.getElementById("evidence-drawer")
-            .classList.add("open");
+//         document.getElementById("evidence-drawer")
+//             .classList.add("open");
 
-        document.getElementById("drawer-overlay")
-            .classList.add("open");
+//         document.getElementById("drawer-overlay")
+//             .classList.add("open");
 
-    });
+//     });
 
 
-// Close Evidence Drawer
-function closeEvidenceDrawer() {
+// // Close Evidence Drawer
+// function closeEvidenceDrawer() {
 
-    document.getElementById("evidence-drawer")
-        .classList.remove("open");
+//     document.getElementById("evidence-drawer")
+//         .classList.remove("open");
 
-    document.getElementById("drawer-overlay")
-        .classList.remove("open");
+//     document.getElementById("drawer-overlay")
+//         .classList.remove("open");
 
-}
+// }
 
-document.getElementById("close-evidence-btn")
-    .addEventListener("click", closeEvidenceDrawer);
+// document.getElementById("close-evidence-btn")
+//     .addEventListener("click", closeEvidenceDrawer);
 
-document.getElementById("drawer-overlay")
-    .addEventListener("click", closeEvidenceDrawer);
+// document.getElementById("drawer-overlay")
+//     .addEventListener("click", closeEvidenceDrawer);
 
