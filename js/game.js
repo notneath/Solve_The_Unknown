@@ -1,4 +1,3 @@
-
 // GET PLAYER INFORMATION
 
 const playerData = JSON.parse(
@@ -103,45 +102,8 @@ document.getElementById("begin-investigation-btn")
     });
 
 
-// TIMER
+// TIMER FOR MEMBER 3
 
-let timeLeft = 300;
-
-let timerInterval = null;
-
-function startTimer() {
-
-    if (timerInterval !== null) return;
-
-    timerInterval = setInterval(function() {
-
-        if (timeLeft > 0) {
-
-            timeLeft--;
-
-            const minutes = Math.floor(timeLeft / 60);
-
-            const seconds = timeLeft % 60;
-
-            document.getElementById("timer").textContent =
-                "Time " +
-                String(minutes).padStart(2, "0") +
-                ":" +
-                String(seconds).padStart(2, "0");
-
-        } else {
-
-            clearInterval(timerInterval);
-
-            timerInterval = null;
-
-            alert("Time is up!");
-
-        }
-
-    }, 1000);
-
-}
 
 
 // EVIDENCE DRAWER
