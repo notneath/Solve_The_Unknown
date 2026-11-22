@@ -32,15 +32,12 @@ const suspects = [
         evidence: "Deleted several emails the day before.",
         motive: "Unknown"
     }
-];
+]
 
 // AVATAR HELPERS (DiceBear)
 // The seed decides the face, so the same seed gives the same face.
-
-function getAvatarUrl(seed) {
-    return "https://api.dicebear.com/9.x/adventurer/svg?seed=" +
-           encodeURIComponent(seed);
-}
+const getAvatarUrl = (seed) =>
+    `https://api.dicebear.com/10.x/adventurer/svg?seed=${encodeURIComponent(seed)}`
 
 // Grey circle with "?" used when the image fails to load
 const AVATAR_FALLBACK =
@@ -50,102 +47,83 @@ const AVATAR_FALLBACK =
         '<rect width="85" height="85" fill="#dededb"/>' +
         '<text x="42" y="54" font-size="36" text-anchor="middle" ' +
         'fill="#666">?</text></svg>'
-    );
+    )
 
-function setAvatar(img, seed, altText) {
-    img.alt = altText;
-
-    // Switch to the fallback once. The flag stops an endless error loop.
-    img.onerror = function () {
-        img.onerror = null;
-        img.src = AVATAR_FALLBACK;
-    };
-
-    img.src = getAvatarUrl(seed);
+const setAvatar = (img, seed, altText) => {
+    img.alt = altText
+    // Switch to the fallback once. Clearing onerror stops an endless error loop.
+    img.onerror = () => {
+        img.onerror = null
+        img.src = AVATAR_FALLBACK
+    }
+    img.src = getAvatarUrl(seed)
 }
 
 // Victim avatar (the img already exists in game.html)
-const victimImg = document.querySelector(".victim-avatar");
+const victimImg = document.querySelector(".victim-avatar")
 if (victimImg) {
-    setAvatar(victimImg, "Robert Anderson", "Portrait of the victim");
+    setAvatar(victimImg, "Robert Anderson", "Portrait of the victim")
 }
-
 
 // SHOW A DASHBOARD TAB (relies on data-section on the tab buttons)
-
-function goToSection(sectionId, tabSectionId) {
-    const tabButton = document.querySelector(
-        '.tab-btn[data-section="' + tabSectionId + '"]'
-    );
-    showDashboardSection(sectionId, tabButton);
+const goToSection = (sectionId, tabSectionId) => {
+    const tabButton = document.querySelector(`.tab-btn[data-section="${tabSectionId}"]`)
+    showDashboardSection(sectionId, tabButton)
 }
-
-
-// DISPLAY SUSPECT CARDS
-
-function displaySuspects() {
-    const container = document.getElementById("suspect-list");
-    container.innerHTML = "";
-
-    suspects.forEach(function (suspect) {
-        const card = document.createElement("div");
-        card.classList.add("suspect-card");
-
-        const img = document.createElement("img");
-        setAvatar(img, suspect.name, "Avatar of " + suspect.name);
-
-        const name = document.createElement("h3");
-        name.textContent = suspect.name;
-
-        const occupation = document.createElement("p");
-        occupation.textContent = suspect.occupation;
-
-        const motive = document.createElement("p");
-        motive.textContent = suspect.motive;
-
-        const button = document.createElement("button");
-        button.textContent = "View profile";
-        button.addEventListener("click", function () {
-            viewSuspect(suspect.id);
-        });
-
-        card.append(img, name, occupation, motive, button);
-        container.appendChild(card);
-    });
-}
-
 
 // VIEW SUSPECT PROFILE
-
-function viewSuspect(id) {
-    const suspect = suspects.find(function (s) {
-        return s.id === id;
-    });
-
-    if (!suspect) return;
-
+const viewSuspect = (id) => {
+    const suspect = suspects.find(s => s.id === id)
+    if (!suspect) return
     setAvatar(
         document.getElementById("profile-avatar"),
         suspect.name,
-        "Avatar of " + suspect.name
-    );
+        `Avatar of ${suspect.name}`
+    )
 
-    document.getElementById("profile-name").textContent = suspect.name;
-    document.getElementById("profile-occupation").textContent = suspect.occupation;
-    document.getElementById("profile-background").textContent = suspect.background;
-    document.getElementById("profile-evidence").textContent = suspect.evidence;
-    document.getElementById("profile-motive").textContent = suspect.motive;
+    document.getElementById("profile-name").textContent = suspect.name
+    document.getElementById("profile-occupation").textContent = suspect.occupation
+    document.getElementById("profile-background").textContent = suspect.background
+    document.getElementById("profile-evidence").textContent = suspect.evidence
+    document.getElementById("profile-motive").textContent = suspect.motive
 
     // Show the profile; keep the "Suspects" tab highlighted
-    goToSection("suspect-profile-section", "suspects-section");
+    goToSection("suspect-profile-section", "suspects-section")
 }
 
+// DISPLAY SUSPECT CARDS
+const displaySuspects = () => {
+    const container = document.getElementById("suspect-list")
+    container.innerHTML = ""
+    suspects.forEach(suspect => {
+        const card = document.createElement("div")
+        card.classList.add("suspect-card")
+
+        const img = document.createElement("img")
+        setAvatar(img, suspect.name, `Avatar of ${suspect.name}`)
+
+        const name = document.createElement("h3")
+        name.textContent = suspect.name
+
+        const occupation = document.createElement("p")
+        occupation.textContent = suspect.occupation
+
+        const motive = document.createElement("p")
+        motive.textContent = suspect.motive
+
+        const button = document.createElement("button")
+        button.textContent = "View profile"
+        button.addEventListener("click", () => viewSuspect(suspect.id))
+
+        card.append(img, name, occupation, motive, button)
+        container.appendChild(card)
+    })
+}
 
 // BACK BUTTON (profile -> suspect grid)
-
-const profileBackBtn = document.getElementById("profile-back-btn");
+const profileBackBtn = document.getElementById("profile-back-btn")
 if (profileBackBtn) {
-    profileBackBtn.addEventListener("click", function () {
-        goToSection("suspects-section", "suspects-section");
-    });
+    profileBackBtn.addEventListener("click", () => {
+        goToSection("suspects-section", "suspects-section")
+    })
 }

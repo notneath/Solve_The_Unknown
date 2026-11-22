@@ -20,17 +20,27 @@ if (playerData) {
 
 // SWITCH DASHBOARD SECTIONS
 const showDashboardSection = (sectionId, button) => {
+    const target = document.getElementById(sectionId)
+
+    if (!target) {
+        console.warn(`Section not found: ${sectionId}`)
+        return
+    }
+
     document.querySelectorAll(".dashboard-section")
-    .forEach(section => section.classList.add("hidden"))
-    document.getElementById(sectionId).classList.remove("hidden")
+        .forEach(section => section.classList.add("hidden"))
+
+    target.classList.remove("hidden")
+
     document.querySelectorAll(".tab-btn")
-    .forEach(btn => btn.classList.remove("active"))
-    button.classList.add("active")
+        .forEach(btn => btn.classList.remove("active"))
+
+    if (button) button.classList.add("active")
 }
 // NAVIGATION BUTTONS
 document.querySelectorAll(".tab-btn[data-section]").forEach(button => {
     button.addEventListener("click", () => {
-        showDashboardSection(button.dataset.setion, button)
+        showDashboardSection(button.dataset.section, button)
     })
 })
 // BEGIN INVESTIGATION
@@ -39,7 +49,7 @@ document.getElementById("begin-investigation-btn").addEventListener("click", () 
     dashboardScreen.classList.remove("hidden")
 
     displaySuspects()
-    startTimer()
+    if (typeof startTimer === "function") startTimer()
 })
 // TIMER FOR MEMBER 3
 
