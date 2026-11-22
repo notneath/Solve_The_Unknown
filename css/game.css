@@ -157,9 +157,13 @@
 }
 
 .profile-back-btn {
-    background: #ffffff;
-    color: black;
+    background: black;
+    color: white;
     margin-bottom: 15px;
+}
+
+.profile-back-btn:hover {
+    background: #444444
 }
 
 /* ---------- Evidence drawer (position and look only) ---------- */
