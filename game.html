@@ -1,1 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solve the Unknown</title>
+    <link rel="icon" type="image/png" href="image/detective.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/game.css">
+</head>
+
+<body>
+    <main class="container">
+        <section id="case-screen" class="screen">
+            <div class="case-card">
+                <h1>CASE FILE #1</h1>
+                <h2>The Midnight Mystery</h2>
+                <p class="case-description">
+                    A mysterious incident happened last night.
+                    Your job is to investigate the case and
+                    discover the truth.
+                </p>
+                <hr>
+                <h3>Initial Clues</h3>
+                <div class="clue">
+                    <h4>Clue 01</h4>
+                    <p>A mysterious note was discovered.</p>
+                </div>
+                <div class="clue">
+                    <h4>Clue 02</h4>
+                    <p>The incident happened around midnight.</p>
+                </div>
+
+                <button id="begin-investigation-btn" class="main-btn">Begin Investigation</button>
+                <button id="back-btn" class="secondary-btn">Back to Start</button>
+            </div>
+        </section>
+
+
+<!-- Game dashboard -->
+
+        <section id="dashboard-screen" class="screen hidden">
+            <header class="game-header">
+                <h1>Solve the Unknown</h1>
+                <div class="game-status">
+                    <span id="timer">Time 05:00</span>
+                    <span id="missions-count">Missions 3 left</span>
+                </div>
+                <button id="evidence-btn">Evidence (2)</button>
+</header>
+            <nav class="game-navigation">
+                <button class="tab-btn active" data-section="case-section">Case File</button>
+                <button class="tab-btn" data-section="suspects-section">Suspects</button>
+                <button class="tab-btn" data-section="missions-section">Missions</button>
+                <button class="tab-btn" data-section="accuse-section">Accuse</button>
+            </nav>
+<!-- Case file -->
+            <div id="case-section" class="dashboard-section">
+                <div class="case-layout">
+                    <div class="dashboard-panel">
+                        <h2>Case Summary</h2>
+                        <div class="summary-placeholder" id="dashboard-summary">The case story will appear here.
+                        </div>
+                        <p>Victim:
+                            <span id="summary-victim">Robert Anderson</span>
+                        </p>
+                        <p>
+                            Location: To be discovered
+                        </p>
+                        <p>
+                            Time: Around midnight
+                        </p>
+                    </div>
+                    <!-- Victim Information -->
+
+                    <div class="dashboard-panel">
+                        <h2>Victim</h2>
+                        <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Robert" class="victim-avatar" alt="Victim portrait">
+                        <p id="victim-details">Robert Anderson, age and details.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suspect -->
+            <div id="suspects-section" class="dashboard-section hidden">
+                <h2>Suspects</h2>
+                <p>Review the suspects and investigate their possible involvement in the case.</p>
+                <div id="suspect-list" class="suspect-grid">
+
+                    <!-- JavaScript generates suspect cards here -->
+
+                </div>
+
+            </div>
+
+            <div id="suspect-profile-section" class="dashboard-section hidden">
+                <button id="profile-back-btn" class="profile-back-btn">← Back to suspects</button>
+                <div class="dashboard-panel">
+                    <img id="profile-avatar" class="profile-avatar" alt="">
+                    <h2 id="profile-name"></h2>
+                    <p id="profile-occupation"></p>
+                    <h3>Background</h3>
+                    <p id="profile-background"></p>
+                    <h3>Evidence</h3>
+                    <p id="profile-evidence"></p>
+                    <h3>Motive</h3>
+                    <p id="profile-motive"></p>
+                </div>
+
+            </div>
+
+            <!-- Mission -->
+            <div id="missions-section" class="dashboard-section hidden">
+                <h2>Investigation Missions</h2>
+                <p>Complete the missions to collect information and uncover the truth.</p>
+                <div class="dashboard-panel">
+                    <h3>Mission 01</h3>
+                    <span>Pending</span>
+                </div>
+                <div class="dashboard-panel">
+                    <h3>Mission 02</h3>
+                    <span>Pending</span>
+                </div>
+                <div class="dashboard-panel">
+                    <h3>Mission 03</h3>
+                    <span>Pending</span>
+                </div>
+            </div>
+            <!-- Accuse -->
+            <div id="accuse-section" class="dashboard-section hidden">
+                <h2>Accuse</h2>
+                <p>Choose who you think is responsible.</p>
+            </div>
+            <!-- Evidence Drawer -->
+            <aside id="evidence-drawer" class="evidence-drawer">
+                <div class="drawer-header">
+                    <h2>Evidence (<span id="evidence-count">0</span>)</h2>
+                    <button id="close-evidence-btn">Close</button>
+                </div>
+
+            <!-- MEMBER 4: render clue entries inside this div -->
+                <div id="evidence-list">
+                <p class="loading-message">No evidence yet.</p>
+                </div>
+
+            </aside>
+            <!-- Evidence Drawer Overlay -->
+            <div
+                id="drawer-overlay"
+                class="drawer-overlay">
+            </div>
+        </section>
+
+    </main>
+
+    <script src="js/suspects.js"></script>
+    <script src="js/game.js"></script>
+
+</body>
+</html>
