@@ -112,25 +112,61 @@
 
             <!-- Mission -->
             <div id="missions-section" class="dashboard-section hidden">
-                <h2>Investigation Missions</h2>
-                <p>Complete the missions to collect information and uncover the truth.</p>
-                <div class="dashboard-panel">
-                    <h3>Mission 01</h3>
-                    <span>Pending</span>
+               <div class="missions">
+
+                <div class="mission">
+                    <h3>Mission 1: Quiz</h3>
+                    <p>Answer the questions to gather information.</p>
+                    <p>Status: available</p>
+                    <button class="mission-btn" data-mission="1">Start Mission</button>
                 </div>
-                <div class="dashboard-panel">
-                    <h3>Mission 02</h3>
-                    <span>Pending</span>
+                <div class="mission">
+                    <h3>Mission 2: Examine Evidence</h3>
+                    <p>Pick the right detail in a description.</p>
+                    <p>Status: available</p>
+                    <button class="mission-btn" data-mission="2">Start Mission</button>
                 </div>
-                <div class="dashboard-panel">
-                    <h3>Mission 03</h3>
-                    <span>Pending</span>
+                <div class="mission">
+                    <h3>Mission 3: Interview Suspects</h3>
+                    <p>Final answer</p>
+                    <p>Status: locked until mission 2 is completed</p>
+                    <button class="mission-btn" data-mission="3">Start Mission</button>
                 </div>
+
+               </div>
             </div>
             <!-- Accuse -->
+
             <div id="accuse-section" class="dashboard-section hidden">
-                <h2>Accuse</h2>
-                <p>Choose who you think is responsible.</p>
+                <div class="accuse-layout">
+                    <div class="dashboard-panel">
+                        <h2>Who did it?</h2>
+                        <div id="accuse-suspect-list" class="accuse-grid">
+                            <!-- JavaScript generates suspect cards for accusation here -->
+                        </div>
+
+                        <label for="accuse-reasoning" class="accuse-reasoning-label">Reasoning: </label>
+                        <textarea id="accuse-reasoning" class="accuse-textarea" placeholder="Explain your reasoning for accusing this suspect..."></textarea>
+                        <button id="submit-accusation-btn" class="main-btn">Submit Accusation</button>
+                    </div>
+                    <div class="dashboard-panel accuse-clues-panel">
+                        <h3>Your clues</h3>
+                        <div id="accuse-clue-list">
+                            <!-- JavaScript generates clue cards here -->
+                        </div>
+                        <p class="accuse-hint">Review before you submit</p>
+                    </div>
+
+                </div>
+
+                <!--Result-->
+                <div id="accuse-result" class="accuse-result hidden">
+                    <h2 id="accuse-result-title">Result</h2>
+                    <p id="accuse-result-text"></p>
+                    <p class="accuse-score" id="accuse-score"></p>
+                    <button id="save-leaderboard-btn" class="main-btn">Save to Leaderboard</button>
+                    <button id="restart-btn" class="secondary-btn">Restart Game</button>
+                </div>
             </div>
             <!-- Evidence Drawer -->
             <aside id="evidence-drawer" class="evidence-drawer">

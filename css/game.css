@@ -115,6 +115,139 @@
     object-fit: cover;
 }
 
+
+/*---mission---*/
+
+.missions {
+    display: flex !important;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.mission {
+    flex: 1;
+    border: 2px solid #222;
+    border-radius: 10px;
+    background: #fff;
+    padding: 16px;
+}
+.mission h3 { margin: 0 0 12px; font-size: 18px; }
+.mission p { color: #555; margin: 0 0 8px; }
+.mission-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 2px solid #222;
+    background: #222;
+    color: #fff;
+    cursor: pointer;
+}
+.mission-btn:hover {
+    background: #444;
+    border-color: #444;
+}
+
+
+/*---accuse---*/
+
+/* ---------- Accuse ---------- */
+.accuse-layout {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.accuse-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.accuse-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 2px solid #222;
+    border-radius: 10px;
+    background: #fff;
+    padding: 12px 15px;
+    cursor: pointer;
+}
+
+.accuse-option:hover {
+    background: #f4f3ef;
+}
+
+.accuse-option input {
+    accent-color: #222;
+}
+
+.accuse-option img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #dededb;
+}
+
+.accuse-reasoning-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.accuse-textarea {
+    width: 100%;
+    min-height: 140px;
+    padding: 12px;
+    font-family: inherit;
+    font-size: 15px;
+    border: 2px solid #222;
+    border-radius: 10px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.accuse-error {
+    color: #b00020;
+    font-size: 14px;
+}
+
+.accuse-clues-panel .clue {
+    margin-bottom: 10px;
+}
+
+.accuse-hint {
+    color: #777;
+    font-size: 14px;
+}
+
+/* Result box */
+.accuse-result {
+    margin-top: 20px;
+    border: 3px dashed #222;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.accuse-result.correct { border-color: #2e7d32; }
+.accuse-result.wrong { border-color: #b00020; }
+
+.accuse-result .secondary-btn {
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
 /* ---------- Suspects ---------- */
 #suspects-section {
     margin-top: 25px;
