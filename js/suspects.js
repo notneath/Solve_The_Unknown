@@ -1,4 +1,6 @@
 // SUSPECT DATA (FAKE DATA)
+
+// let suspects = []
 const suspects = [
     {
         id: 1,

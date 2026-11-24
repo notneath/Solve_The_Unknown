@@ -8,8 +8,49 @@ if (!playerData) {
 // GET SCREENS
 const caseScreen = document.getElementById("case-screen")
 const dashboardScreen = document.getElementById("dashboard-screen")
-// BACK TO START
 
+// LOAD CASE FROM API (Member 1's getCase)
+// let caseData = null
+// const statusMessage = document.getElementById("status-message")
+// const beginBtn = document.getElementById("begin-investigation-btn")
+
+// const showLoading = () => {
+//     statusMessage.className = "loading-message"
+//     statusMessage.textContent = "Loading case..."
+//     beginBtn.disabled = true
+// }
+
+// const showError = (text) => {
+//     statusMessage.className = "error-message"
+//     statusMessage.textContent = text
+// }
+
+// const clearStatus = () => {
+//     statusMessage.className = ""
+//     statusMessage.textContent = ""
+//     beginBtn.disabled = false
+// }
+
+// const loadCase = async () => {
+//     try {
+//         showLoading()
+//         caseData = await getCase(1)
+//         suspects = caseData.suspects
+//         renderCase()
+//         clearStatus()
+//     } catch (error) {
+//         showError("Could not load the case. Check your internet and try again.")
+//     }
+// }
+
+// // Fills the case file text from the data
+// const renderCase = () => {
+//     document.querySelector(".case-card h2").textContent = caseData.title
+//     document.querySelector(".case-description").textContent = caseData.summary
+// }
+// loadCase()  // runs when the page opens
+
+// BACK TO START
 document.getElementById("back-btn").addEventListener("click", () => {
         window.location.href = "index.html"
 })
@@ -51,6 +92,27 @@ document.getElementById("begin-investigation-btn").addEventListener("click", () 
     displaySuspects()
     if (typeof startTimer === "function") startTimer()
 })
+
+// document.getElementById("begin-investigation-btn")
+//     .addEventListener("click", async () => {
+
+//         try {
+//             const progress = await createProgress({
+//                 mode: playerData.mode,
+//                 name: playerData.name
+//             })
+//             sessionStorage.setItem("progressId", progress.id)
+//         } catch (error) {
+//             showError("Could not start the game. Please try again.")
+//             return
+//         }
+
+//         caseScreen.classList.add("hidden")
+//         dashboardScreen.classList.remove("hidden")
+
+//         displaySuspects()
+//         startTimer()
+//     })
 // TIMER FOR MEMBER 3
 
 
