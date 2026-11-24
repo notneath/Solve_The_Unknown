@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mission Engine Test Page</title>
+  <title>Mission Test</title>
   <style>
     body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; }
     #status { display: flex; gap: 1.5rem; font-weight: 600; margin-bottom: 1rem; }
@@ -31,22 +31,7 @@
 
   <h3>Evidence board (test)</h3>
   <ol id="clues"></ol>
-
-   <!-- Fake case data. Member 1's real data replaces this. -->
-  <script>
-    window.gameState = {
-      caseData: {
-        extraClues: [
-          { text: "A muddy footprint was found near the window." },
-          { text: "The security camera stopped at 9:40 PM." },
-          { text: "A torn piece of blue fabric was in the garden." },
-        ],
-        evidenceMissions: [
-          { question: "The note says 'Meet me at the library.' Which detail is MOST useful?", options: ["The time written on it", "The color of the paper", "The pen brand", "The font size"], answer: "The time written on it" },
-        ],
-      },
-    };
-  </script>
-  <script src="mission.js"></script>
+  
+  <script src="missions.js"></script>
 </body>
 </html>
