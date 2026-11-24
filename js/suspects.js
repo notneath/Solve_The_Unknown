@@ -1,5 +1,5 @@
 // SUSPECT DATA (FAKE DATA)
-const suspects = [
+let suspects = [
     {
         id: 1,
         name: "Alex Morgan",
