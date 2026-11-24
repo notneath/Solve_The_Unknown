@@ -143,7 +143,7 @@
                         <h2>Who did it?</h2>
 
                         <div id="accuse-error" class="hidden">Please pick a suspect and write your reasoning</div>
-                        
+
                         <div id="accuse-suspect-list" class="accuse-grid">
                             <!-- JavaScript generates suspect cards for accusation here -->
                         </div>
@@ -174,23 +174,45 @@
 
             
             <!-- Evidence Drawer -->
-            <aside id="evidence-drawer" class="evidence-drawer">
+            <!-- <aside id="evidence-drawer" class="evidence-drawer">
                 <div class="drawer-header">
                     <h2>Evidence (<span id="evidence-count">0</span>)</h2>
                     <button id="close-evidence-btn">Close</button>
                 </div>
 
-            <!-- MEMBER 4: render clue entries inside this div -->
-                <div id="evidence-list">
+             MEMBER 4: render clue entries inside this div -->
+                <!-- <div id="evidence-list">
                 <p class="loading-message">No evidence yet.</p>
                 </div>
 
-            </aside>
+            </aside> -->
             <!-- Evidence Drawer Overlay -->
-            <div
+            <!-- <div
                 id="drawer-overlay"
                 class="drawer-overlay">
+            </div> --> 
+
+           <!-- evidence page -->
+
+           <section id="evidence-page" class="hidden">
+            <div class="evidence-header">
+                <h2 id="evidence-counter">Evidence board: 0 of 5 clues found</h2>
+                <p class="evidence-hint">Newest clue appears at the top, no page reload</p>
             </div>
+
+            <div id="evidence-board">
+
+                <!-- js -->
+            </div>
+
+            <button id="go-to-missions-btn">Go to Missions</button>
+            <button id="ready-to-accuse-btn">Ready to accuse</button>
+           </section>
+
+         
+
+
+            
         </section>
 
     </main>

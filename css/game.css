@@ -305,7 +305,7 @@
 }
 
 /* ---------- Evidence drawer (position and look only) ---------- */
-.evidence-drawer {
+/* .evidence-drawer {
     position: fixed;
     top: 0;
     right: -400px;
@@ -340,7 +340,27 @@
 
 .drawer-overlay.open {
     display: block;
+} */
+
+
+.clue-card {
+    border: 2px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 16px;
+    background: #fff;
 }
+.clue-card.locked {
+    border: 2px dashed #999;      /* the dashed look */
+    color: #888;
+    background: #fafafa;
+}
+.clue-card.newest {
+    background: #e8e6e1;          /* light gray highlight, like Clue 3 in your mockup */
+}
+
+
+
+
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
