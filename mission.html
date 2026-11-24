@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mission Engine Test Page</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; }
+    #status { display: flex; gap: 1.5rem; font-weight: 600; margin-bottom: 1rem; }
+    #options button { display: block; width: 100%; margin: .4rem 0; padding: .7rem; font-size: 1rem; cursor: pointer; }
+    #feedback { min-height: 1.5rem; font-weight: 600; }
+    #clues li { margin: .3rem 0; }
+    .notice { color: #a15c00; }
+  </style>
+</head>
+<body>
+  <h1>Mission Engine Test</h1>
+  <div id="status">
+    <span>Time: <span id="timer">--:--</span></span>
+    <span>Attempts left: <span id="attempts">3</span></span>
+  </div>
+
+  <button id="startGame">Start game (timer)</button>
+  <button id="startQuiz">Quiz mission</button>
+  <button id="startEvidence">Evidence mission</button>
+
+  <h2 id="question"></h2>
+  <div id="options"></div>
+  <p id="feedback" role="status"></p>
+  <p id="notice" class="notice"></p>
+
+  <h3>Evidence board (test)</h3>
+  <ol id="clues"></ol>
+
+  <!-- Fake case data. Member 1's real data replaces this. -->
+  <script>
+    window.gameState = {
+      caseData: {
+        extraClues: [
+          { text: "A muddy footprint was found near the window." },
+          { text: "The security camera stopped at 9:40 PM." },
+          { text: "A torn piece of blue fabric was in the garden." },
+        ],
+        evidenceMissions: [
+          { question: "The note says 'Meet me at the library.' Which detail is MOST useful?", options: ["The time written on it", "The color of the paper", "The pen brand", "The font size"], answer: "The time written on it" },
+        ],
+      },
+    };
+</body>
+</html>
