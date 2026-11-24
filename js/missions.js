@@ -1,7 +1,6 @@
-//   1. Gets quiz questions
-//   2. Counts the player's 3 attempts
-//   3. Runs the countdown timer
-//   4. Unlocks a new clue when the player answers correctly
+//   mission divided into two parts of js: mission and mission-ui.
+//   The purpose of creating this to: Gets quiz questions, counts the player's 3 attempts, runs the countdown timer, and unlocks a new clue when the player answers correctly.
+
 (function () {
   // SETTINGS (change numbers here only) 
   const SETTINGS = {
@@ -272,6 +271,16 @@
     canAnswer = false;
     currentQuestion = null;
   }
+  // What the UI part (and teammates) can use
+  window.Missions = {
+    SETTINGS: SETTINGS,
+    startTimer: startTimer,
+    stopTimer: stopMissions,
+    startMission: startMission,
+    answerMission: answerMission,
+    resetMissions: resetMissions,
+    formatTime: formatTime,
+  };
 
 })();
 
