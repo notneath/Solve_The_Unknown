@@ -87,7 +87,7 @@ const collectedClues = []
 // LOAD THE CASE FROM FRIEND'S API
 const loadCase = async () => {
     try {
-        const caseData = await getCase(1)
+        caseData = await getCase(1)
         suspects = caseData.suspects        // refill the array suspects.js uses
         CULPRIT_ID = caseData.culpritId     // remember who did it
 
@@ -128,7 +128,7 @@ const buildAccuseList = () => {
     `).join("")
 }
 
-const correct = Number(chosen.value) === CULPRIT_ID
+
 
 
 // SUBMIT ACCUSATION
@@ -144,14 +144,16 @@ document.getElementById("submit-accusation-btn").addEventListener("click", async
     }
     errorBox.classList.add("hidden")
 
-    // CHECK IF CORRECT
-    const correct = Number(chosen.value) === caseData.culpritId
+   // calculate time cuz nith hasnt done the timer yet
+   const elapsed = typeof startTime === "number"
+        ? Math.floor((Date.now() - startTime) / 60000)
+        : 0
 
     // SAVE RESULT TO FRIEND'S API
     try {
         await saveResult(progressId, {
             score: correct ? 100 : 0,
-            timeTaken: Math.round((Date.now() - startTime) / 60000),
+            timeTaken: elapsed,
             cluesUsed: collectedClues.length
         })
     } catch (err) {
@@ -172,13 +174,18 @@ document.getElementById("submit-accusation-btn").addEventListener("click", async
     resultBox.scrollIntoView({ behavior: "smooth" })
 })
 
-// PLAY AGAIN BUTTON
-document.getElementById("play-again-btn").addEventListener("click", async () => {
+// RESTART GAME
+document.getElementById("restart-btn").addEventListener("click", async () => {
     try {
         await deleteProgress(progressId)
     } catch (err) {
         console.warn(err.message)
     }
     window.location.reload()
+})
+
+// SAVE TO LEADERBOARD
+document.getElementById("save-leaderboard-btn").addEventListener("click", () => {
+    alert("Leaderboard coming soon!")  // placeholder until Member 4's part is ready
 })
 

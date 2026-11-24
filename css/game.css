@@ -240,6 +240,11 @@
     margin-left: 10px;
 }
 
+.hidden { display: none; }
+#accuse-result.correct { border: 2px solid green; }
+#accuse-result.wrong { border: 2px solid red; }
+
+
 
 
 
