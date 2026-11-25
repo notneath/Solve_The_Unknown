@@ -1,6 +1,15 @@
 const BASE_URL = "https://6b046d6a9e7cafb37dc05c9a.mockapi.io/api/stu"
 
 async function request(endpoint, options) {
+    //Quik check to let the browser knows it is offline
+    if (!navigator.onLine) {
+        throw new Error("Could not erach the server. Please check your internet connection and try again.")
+    }
+
+    //timeout: cancle the request if it takes longer than 5 seconds
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 5000)
+    
     let response;
     try {
         response = await fetch(BASE_URL + endpoint, {
