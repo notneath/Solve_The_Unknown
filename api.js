@@ -9,7 +9,7 @@ async function request(endpoint, options) {
         })
     } catch (error) {
         //if the internet is down
-        throw new Error("Could not reach the server. Please check you internet connection and try again.")
+        throw new Error("Could not reach the server. Please check your internet connection and try again.")
     }
 
     if (!response.ok) {
