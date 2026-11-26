@@ -150,6 +150,7 @@ document.getElementById("begin-investigation-btn").addEventListener("click", asy
             }
         }
 
+        sessionStorage.setItem("attemptsLeft", "3")
         caseScreen.classList.add("hidden")
         dashboardScreen.classList.remove("hidden")
 
