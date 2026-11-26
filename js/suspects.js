@@ -1,6 +1,4 @@
 // SUSPECT DATA (FAKE DATA)
-
-let suspects = []
 // const suspects = [
 //     {
 //         id: 1,
@@ -35,6 +33,7 @@ let suspects = []
 //         motive: "Unknown"
 //     }
 // ]
+let suspects = []
 
 // AVATAR HELPERS (DiceBear)
 // The seed decides the face, so the same seed gives the same face.

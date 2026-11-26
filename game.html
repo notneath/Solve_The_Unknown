@@ -24,14 +24,6 @@
                 <hr>
                 <h3>Initial Clues</h3>
                 <div id="starter-clues"></div>
-                <!-- <div class="clue">
-                    <h4>Clue 01</h4>
-                    <p>A mysterious note was discovered.</p>
-                </div>
-                <div class="clue">
-                    <h4>Clue 02</h4>
-                    <p>The incident happened around midnight.</p>
-                </div> -->
                 <div id="status-message"></div>
                 <button id="begin-investigation-btn" class="main-btn">Begin Investigation</button>
                 <button id="back-btn" class="secondary-btn">Back to Start</button>
@@ -45,10 +37,10 @@
             <header class="game-header">
                 <h1>Solve the Unknown</h1>
                 <div class="game-status">
-                    <span id="timer">Time 05:00</span>
+                    <span id="timer">Time 06:00</span>
                     <span id="missions-count">Missions 3 left</span>
                 </div>
-                <button id="evidence-btn">Evidence (2)</button>
+                <button id="evidence-btn">Evidence</button>
 </header>
             <nav class="game-navigation">
                 <button class="tab-btn active" data-section="case-section">Case File</button>
@@ -71,7 +63,7 @@
                     <div class="dashboard-panel">
                         <h2>Victim: <span id="victim-name"></span></h2>
                         <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Robert" class="victim-avatar" alt="Victim portrait">
-                        <p id="victim-details">Robert Anderson, age and details.</p>
+                        <p id="victim-details"></p>
                     </div>
                 </div>
             </div>
@@ -106,33 +98,73 @@
             </div>
 
 
-<!-- Mission -->
-                <div id="missions-section" class="dashboard-section hidden">
-                    <h2>Investigation Missions</h2>
-                    <p>Complete the missions to collect information and uncover the truth.</p>
 
-    <!-- Mission Status -->
-                <div class="dashboard-panel">
-                <div id="status">
-                    <span id="mission-progress">Missions: 0 completed</span>
-                <span id="mission-score">Score: 0</span>
-            </div>
-         </div>
-    <!-- Mission Questions -->
-                <div id="mission-list"></div>
-    <!-- Evidence Board -->
-                <div class="dashboard-panel">
-                    <h3>Evidence Board</h3>
-                    <ol id="clues">
-                    </ol>
+            <!-- Mission -->
+            <div id="missions-section" class="dashboard-section hidden">
+               <div class="missions">
+
+                <div class="mission">
+                    <h3>Mission 1: Quiz</h3>
+                    <p>Answer the questions to gather information.</p>
+                    <p>Status: available</p>
+                    <button class="mission-btn" data-mission="1">Start Mission</button>
                 </div>
-        </div>
+                <div class="mission">
+                    <h3>Mission 2: Examine Evidence</h3>
+                    <p>Pick the right detail in a description.</p>
+                    <p>Status: available</p>
+                    <button class="mission-btn" data-mission="2">Start Mission</button>
+                </div>
+                <div class="mission">
+                    <h3>Mission 3: Interview Suspects</h3>
+                    <p>Final answer</p>
+                    <p>Status: locked until mission 2 is completed</p>
+                    <button class="mission-btn" data-mission="3">Start Mission</button>
+                </div>
 
-            <!-- Accuse -->
-            <div id="accuse-section" class="dashboard-section hidden">
-                <h2>Accuse</h2>
-                <p>Choose who you think is responsible.</p>
             </div>
+               <div class="dashboard-panel" id="mission-play">
+                    <p id="notice"></p>
+                    <h3 id="question"></h3>
+                    <div id="options"></div>
+                    <p id="feedback"></p>
+                    <p>Attempts left: <span id="attempts">3</span></p>
+                    <h4>Unlocked clues</h4>
+                    <ul id="clues"></ul>
+                </div>
+            </div>
+            <!-- Accuse -->
+
+            <div id="accuse-section" class="dashboard-section hidden">
+                <div class="accuse-layout">
+                    <div class="dashboard-panel">
+                        <h2>Who did it?</h2>
+                        <div id="accuse-suspect-list" class="accuse-grid">
+                        </div>
+
+                        <label for="accuse-reasoning" class="accuse-reasoning-label">Reasoning: </label>
+                        <textarea id="accuse-reasoning" class="accuse-textarea" placeholder="Explain your reasoning for accusing this suspect..."></textarea>
+                        <button id="submit-accusation-btn" class="main-btn">Submit Accusation</button>
+                    </div>
+                    <div class="dashboard-panel accuse-clues-panel">
+                        <h3>Your clues</h3>
+                        <div id="accuse-clue-list">
+
+                        </div>
+                        <p class="accuse-hint">Review before you submit</p>
+                    </div>
+
+                </div>
+
+                <!--Result-->
+                <div id="accuse-result" class="accuse-result hidden">
+                    <h2 id="accuse-result-title">Result</h2>
+                    <p id="accuse-result-text"></p>
+                    <p class="accuse-score" id="accuse-score"></p>
+                    <button id="restart-btn" class="secondary-btn">Restart Game</button>
+                </div>
+            </div>
+                
             <!-- Evidence Drawer -->
             <aside id="evidence-drawer" class="evidence-drawer">
                 <div class="drawer-header">

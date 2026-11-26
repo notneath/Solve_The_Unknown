@@ -44,7 +44,6 @@ teamBtn.addEventListener("click", () => {
 // Initial setup
 updateGameMode()
 
-
 // Open Case File
 document.getElementById("open-case-btn").addEventListener("click", () => {
     if (playerName.value.trim() === "") {
@@ -67,9 +66,4 @@ document.getElementById("open-case-btn").addEventListener("click", () => {
     sessionStorage.setItem("playerData", JSON.stringify(playerData))
     window.location.href = "game.html"
 
-})
-
-// LEADERBOARD NAVIGATION
-document.getElementById("leaderboard-btn").addEventListener("click", () => {
-    window.location.href = "leaderboard.html"
 })

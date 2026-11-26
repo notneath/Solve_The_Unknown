@@ -1,6 +1,0 @@
-    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; }
-    #status { display: flex; gap: 1.5rem; font-weight: 600; margin-bottom: 1rem; }
-    #options button { display: block; width: 100%; margin: .4rem 0; padding: .7rem; font-size: 1rem; cursor: pointer; }
-    #feedback { min-height: 1.5rem; font-weight: 600; }
-    #clues li { margin: .3rem 0; }
-    .notice { color: #a15c00; }
