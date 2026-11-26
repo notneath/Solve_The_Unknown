@@ -1,1 +1,243 @@
+/* ---------- Case introduction screen ---------- */
+.case-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
 
+.case-header h1 {
+    letter-spacing: 3px;
+}
+
+.case-header p {
+    color: #777;
+    letter-spacing: 2px;
+}
+
+.case-card {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+}
+
+.case-card h2 {
+    font-size: 30px;
+}
+
+.case-card hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 25px 0;
+}
+
+.case-card button {
+    margin-top: 15px;
+}
+
+.case-description {
+    line-height: 1.7;
+    color: #555;
+}
+
+/* Clue cards (used in case intro and evidence drawer) */
+.clue {
+    background-color: #f4f3ef;
+    border-left: 5px solid #b58b48;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.clue h3,
+.clue h4 {
+    margin-top: 0;
+}
+
+/* ---------- Game header and navigation ---------- */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.game-header h1 {
+    font-size: 36px;
+}
+
+.game-status {
+    display: flex;
+    gap: 15px;
+}
+
+.game-status span {
+    border: 2px solid #444444;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 18px;
+}
+
+.game-navigation {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+/* ---------- Case file section ---------- */
+.case-layout {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr;
+    gap: 20px;
+}
+
+.dashboard-panel {
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.case-layout .dashboard-panel {
+    margin-bottom: 0;
+}
+
+.summary-placeholder {
+    min-height: 100px;
+    background: #dededb;
+    margin: 15px 0;
+    padding: 15px;
+}
+
+.victim-avatar {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 12px;
+}
+
+/* ---------- Suspects ---------- */
+#suspects-section {
+    margin-top: 25px;
+}
+
+.suspect-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.suspect-card {
+    padding: 20px;
+    text-align: center;
+}
+
+.suspect-card img,
+.profile-avatar {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #dededb; /* shows if the image fails to load */
+}
+
+.suspect-card button {
+    background: #ffffff;
+    color: black;
+}
+
+.suspect-card button:hover {
+    background: #444444;
+    color: white;
+}
+
+/* Suspect profile view */
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+}
+
+.profile-back-btn {
+    background: black;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.profile-back-btn:hover {
+    background: #444444
+}
+
+/* ---------- Evidence drawer (position and look only) ---------- */
+.evidence-drawer {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    max-width: 85%;
+    height: 100vh;
+    background: #ffffff;
+    border-left: 2px solid #444444;
+    padding: 25px;
+    z-index: 1001;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+}
+
+.evidence-drawer.open {
+    right: 0;
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.drawer-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+}
+
+.drawer-overlay.open {
+    display: block;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+    .suspect-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .case-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .case-card {
+        padding: 18px;
+    }
+
+    .case-card h2 {
+        font-size: 24px;
+    }
+
+    .game-header h1 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 550px) {
+    .suspect-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .game-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
