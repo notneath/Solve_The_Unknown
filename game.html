@@ -45,10 +45,10 @@
             <header class="game-header">
                 <h1>Solve the Unknown</h1>
                 <div class="game-status">
-                    <span id="timer">Time 05:00</span>
+                    <span id="timer">Time 06:00</span>
                     <span id="missions-count">Missions 3 left</span>
                 </div>
-                <button id="evidence-btn">Evidence (2)</button>
+                <button id="evidence-btn">Evidence</button>
 </header>
             <nav class="game-navigation">
                 <button class="tab-btn active" data-section="case-section">Case File</button>
@@ -131,6 +131,15 @@
                 </div>
 
                </div>
+               <div class="dashboard-panel" id="mission-play">
+    <p id="notice"></p>
+    <h3 id="question"></h3>
+    <div id="options"></div>
+    <p id="feedback"></p>
+    <p>Attempts left: <span id="attempts">3</span></p>
+    <h4>Unlocked clues</h4>
+    <ul id="clues"></ul>
+</div>
             </div>
             <!-- Accuse -->
 
@@ -161,7 +170,6 @@
                     <h2 id="accuse-result-title">Result</h2>
                     <p id="accuse-result-text"></p>
                     <p class="accuse-score" id="accuse-score"></p>
-                    <button id="save-leaderboard-btn" class="main-btn">Save to Leaderboard</button>
                     <button id="restart-btn" class="secondary-btn">Restart Game</button>
                 </div>
             </div>

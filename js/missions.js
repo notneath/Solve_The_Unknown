@@ -286,33 +286,35 @@
 
 // mission ui - shows the missions on the screen.
 // It connects the buttons to the engine and listens to the engine's events.
+function find(id) {
+  const el = document.getElementById(id);
+  if (!el) console.warn("Missing element #" + id);
+  return el;
+}
+function setText(id, text) {
+  const el = find(id);
+  if (el) el.textContent = text;
+}
 
-function find(id) { return document.getElementById(id); }
-// For button
-find("startGame").onclick = function () {
-  Missions.resetMissions();
-  Missions.startTimer();
-  find("attempts").textContent = gameState.attemptsLeft;
-  find("clues").innerHTML = "";
-  find("feedback").textContent = "";
-};
-find("startQuiz").onclick = function () {
-  Missions.startMission("quiz");
-};
-find("startEvidence").onclick = function () {
-  Missions.startMission("evidence");
-};
-
-// show the time-left
-document.addEventListener("timer:tick", function (event) {
-  find("timer").textContent = Missions.formatTime(event.detail.timeLeft);
+// Wire the existing mission buttons
+document.querySelectorAll(".mission-btn").forEach(function (btn) {
+  btn.onclick = function () {
+    const n = btn.dataset.mission;
+    if (n === "1") Missions.startMission("quiz");
+    else if (n === "2") Missions.startMission("evidence");
+    else setText("feedback", "Mission 3 is not available yet.");
+  };
 });
 
-// For the time is up.
+document.addEventListener("timer:tick", function (event) {
+  setText("timer", "Time " + Missions.formatTime(event.detail.timeLeft));
+});
+
 document.addEventListener("timer:expired", function () {
-  find("question").textContent = "";
-  find("options").innerHTML = "";
-  find("feedback").textContent = "Time is up now!!!";
+  setText("question", "");
+  const options = find("options");
+  if (options) options.innerHTML = "";
+  setText("feedback", "Time is up now!!!");
 });
 
 // To tell that there is no attempts left.
@@ -373,3 +375,6 @@ document.addEventListener("clue:unlocked", function (event) {
   item.textContent = event.detail.clue.text;
   find("clues").appendChild(item);
 });
+
+
+

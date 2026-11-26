@@ -113,9 +113,141 @@
     height: 85px;
     border-radius: 50%;
     object-fit: cover;
-    display: block;
-    margin-bottom: 12px;
 }
+
+
+/*---mission---*/
+
+.missions {
+    display: flex !important;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.mission {
+    flex: 1;
+    border: 2px solid #222;
+    border-radius: 10px;
+    background: #fff;
+    padding: 16px;
+}
+.mission h3 { margin: 0 0 12px; font-size: 18px; }
+.mission p { color: #555; margin: 0 0 8px; }
+.mission-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 2px solid #222;
+    background: #222;
+    color: #fff;
+    cursor: pointer;
+}
+.mission-btn:hover {
+    background: #444;
+    border-color: #444;
+}
+.mission-btn:disabled { 
+    background: #999;
+    border-color: #999;
+    cursor: not-allowed; 
+}
+
+/*---accuse---*/
+
+/* ---------- Accuse ---------- */
+.accuse-layout {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.accuse-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.accuse-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 2px solid #222;
+    border-radius: 10px;
+    background: #fff;
+    padding: 12px 15px;
+    cursor: pointer;
+}
+
+.accuse-option:hover {
+    background: #f4f3ef;
+}
+
+.accuse-option input {
+    accent-color: #222;
+}
+
+.accuse-option img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #dededb;
+}
+
+.accuse-reasoning-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.accuse-textarea {
+    width: 100%;
+    min-height: 140px;
+    padding: 12px;
+    font-family: inherit;
+    font-size: 15px;
+    border: 2px solid #222;
+    border-radius: 10px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.accuse-error {
+    color: #b00020;
+    font-size: 14px;
+}
+
+.accuse-clues-panel .clue {
+    margin-bottom: 10px;
+}
+
+.accuse-hint {
+    color: #777;
+    font-size: 14px;
+}
+
+
+/* Result box */
+.accuse-result {
+    margin-top: 20px;
+    border: 3px dashed #222;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.accuse-result.correct { border-color: #2e7d32; }
+.accuse-result.wrong { border-color: #b00020; }
+
+.accuse-result .secondary-btn {
+    margin-left: 10px;
+}
+
+.hidden { display: none; }
+#accuse-result.correct { border: 2px solid green; }
+#accuse-result.wrong { border: 2px solid red; }
 
 /* ---------- Suspects ---------- */
 #suspects-section {
@@ -168,6 +300,29 @@
     background: #444444
 }
 
+/* ===== Accuse: suspect choice buttons ===== */
+.suspect-choice {
+    padding: 14px 15px;
+    border: 2px solid #444;
+    border-radius: 10px;
+    background: #fff;
+    color: #222;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+}
+
+.suspect-choice:hover {
+    background: #f4f3ef;
+}
+
+.suspect-choice.selected {
+    background: #222;
+    color: #fff;
+    border-color: #222;
+    transform: scale(1.03);
+}
+
 /* ---------- Evidence drawer (position and look only) ---------- */
 .evidence-drawer {
     position: fixed;
@@ -205,6 +360,78 @@
 .drawer-overlay.open {
     display: block;
 }
+
+
+.clue-card {
+    border: 2px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 16px;
+    background: #fff;
+}
+.clue-card.locked {
+    border: 2px dashed #999;      /* the dashed look */
+    color: #888;
+    background: #fafafa;
+}
+.clue-card.newest {
+    background: #e8e6e1;          /* light gray highlight, like Clue 3 in your mockup */
+}
+
+/* ===== Missions play area ===== */
+#mission-play {
+    margin-top: 20px;              /* gap under the mission cards */
+    padding: 20px;
+}
+
+/* hide the empty parts so they don't leave blank space */
+#mission-play #notice:empty,
+#mission-play #question:empty,
+#mission-play #feedback:empty {
+    display: none;
+}
+
+#mission-play #notice {
+    color: #a15c00;
+    margin: 0 0 10px;
+}
+
+#mission-play #question {
+    margin: 0 0 12px;
+    font-size: 20px;
+}
+
+#mission-play #options button {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 14px;
+    font-size: 16px;
+    text-align: left;
+    border: 2px solid #222;
+    border-radius: 8px;
+    background: #fff;
+    color: #222;
+    cursor: pointer;
+}
+
+#mission-play #options button:hover {
+    background: #f4f3ef;
+}
+
+#mission-play #feedback {
+    margin: 12px 0;
+    font-weight: 600;
+}
+
+#mission-play #clues {
+    padding-left: 20px;
+}
+
+#mission-play #clues li {
+    margin: 6px 0;
+}
+
+
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
