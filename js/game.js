@@ -60,10 +60,14 @@ const evidenceDrawer = document.getElementById("evidence-drawer")
 const drawerOverlay = document.getElementById("drawer-overlay")
 
 // OPEN DRAWER
-document.getElementById("evidence-btn").addEventListener("click", () => {
+const evidenceBtn = document.getElementById("evidence-btn")
+if (evidenceBtn) {
+    evidenceBtn.addEventListener("click", () => {
         evidenceDrawer.classList.add("open")
         drawerOverlay.classList.add("open")
-})
+    })
+}
+
 // CLOSE DRAWER
 
 const closeEvidenceDrawer = () => {
@@ -91,7 +95,8 @@ const loadCase = async () => {
         suspects = caseData.suspects        // refill the array suspects.js uses
         CULPRIT_ID = caseData.culpritId     // remember who did it
 
-        displaySuspects()                   // suspects page cards (theirs)
+        displaySuspects() 
+        renderEvidenceBoard()               // evidence board (theirs)
         buildAccuseList()                   // accuse page radio buttons (ours)
     } catch (err) {
         console.warn("Could not load case:", err.message)
@@ -144,6 +149,8 @@ document.getElementById("submit-accusation-btn").addEventListener("click", async
     }
     errorBox.classList.add("hidden")
 
+    const correct = Number(chosen.value) === CULPRIT_ID
+
    // calculate time cuz nith hasnt done the timer yet
    const elapsed = typeof startTime === "number"
         ? Math.floor((Date.now() - startTime) / 60000)
@@ -189,3 +196,51 @@ document.getElementById("save-leaderboard-btn").addEventListener("click", () => 
     alert("Leaderboard coming soon!")  // placeholder until Member 4's part is ready
 })
 
+// ================= EVIDENCE BOARD =================
+
+const renderEvidenceBoard = () => {
+    const board = document.getElementById("evidence-board")
+    board.innerHTML = ""   // clear and rebuild — this is the "no reload" trick
+
+      
+
+    const allClues = caseData.clues
+    allClues.sort((a, b) => a.id - b.id)   // assumes caseData has a clues array
+
+    allClues.forEach((clue) => {
+        const card = document.createElement("div")
+
+        // Is this clue collected? (check against collectedClues)
+        const isFound = collectedClues.some(c => c.id === clue.id)
+
+        card.className = "clue-card" + (isFound ? "" : " locked")
+
+        if (isFound) {
+            card.innerHTML = `
+                <h3>${clue.title}</h3>
+                <p>${clue.text}</p>
+                <p>Related suspect: ${clue.relatedSuspect}</p>
+            `
+        } else {
+            card.innerHTML = `
+                <h3>${clue.title}</h3>
+                <p>Locked. Complete a mission to unlock.</p>
+            `
+        }
+        board.appendChild(card)
+    })
+
+    // update the counter: "3 of 5 clues found"
+    document.getElementById("evidence-counter").textContent =
+        `Evidence board: ${collectedClues.length} of ${allClues.length} clues found`
+}
+
+document.getElementById("go-to-missions-btn").addEventListener("click", () => {
+    showDashboardSection("missions-section")
+    closeEvidenceDrawer()
+})
+
+document.getElementById("ready-to-accuse-btn").addEventListener("click", () => {
+    showDashboardSection("accuse-section")
+    closeEvidenceDrawer()
+})
