@@ -29,17 +29,17 @@ hardBtn.addEventListener("click", () => selectedDifficulty("hard"))
 
 // Game Mode
 const updateGameMode = () => {
+    soloBtn.classList.toggle("active", gameMode === "solo")
+    teamBtn.classList.toggle("active", gameMode === "team")
     teammateGroup.classList.toggle("hidden", gameMode === "solo")
 }
 soloBtn.addEventListener("click", () => {
     gameMode = "solo"
-    soloBtn.classList.add("active")
-    teamBtn.classList.remove("active")
+    updateGameMode()
 })
 teamBtn.addEventListener("click", () => {
     gameMode = "team"
-    teamBtn.classList.add("active")
-    soloBtn.classList.remove("active")
+    updateGameMode()
 })
 // Initial setup
 updateGameMode()
