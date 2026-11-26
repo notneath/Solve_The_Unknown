@@ -60,14 +60,10 @@ const evidenceDrawer = document.getElementById("evidence-drawer")
 const drawerOverlay = document.getElementById("drawer-overlay")
 
 // OPEN DRAWER
-const evidenceBtn = document.getElementById("evidence-btn")
-if (evidenceBtn) {
-    evidenceBtn.addEventListener("click", () => {
+document.getElementById("evidence-btn").addEventListener("click", () => {
         evidenceDrawer.classList.add("open")
         drawerOverlay.classList.add("open")
-    })
-}
-
+})
 // CLOSE DRAWER
 
 const closeEvidenceDrawer = () => {
@@ -80,39 +76,27 @@ drawerOverlay.addEventListener("click", closeEvidenceDrawer)
 
 // ACCUSE PAGE
 
-
+let CULPRIT_ID = null
 
 
 // STORE CASE DATA HERE
 let caseData = null
 let progressId = null
 const collectedClues = []
-const CASE_FALLBACK = null
-
-if (CASE_FALLBACK) {
-    caseData = CASE_FALLBACK
-} else {
-    alert("could not load case data. Please refresh.")
-    return
-}
-
-
 
 // LOAD THE CASE FROM FRIEND'S API
 const loadCase = async () => {
-    CULPRIT_ID = caseData.solution.culpritId
     try {
-        const res = await fetch ("mockApi.json")
-        if (!res.ok) throw new Error("HTTP " + res.status)
-            caseData = await res.json()
-    } catch (err) {
-        console.warn("Could not load case data:", err)
-        caseData = CASE_FALLBACK // small copy from json
+        caseData = await getCase(1)
+        suspects = caseData.suspects        // refill the array suspects.js uses
+        CULPRIT_ID = caseData.culpritId     // remember who did it
 
+        displaySuspects() 
+        renderEvidenceBoard()               // evidence board (theirs)
+        buildAccuseList()                   // accuse page radio buttons (ours)
+    } catch (err) {
+        console.warn("Could not load case:", err.message)
     }
-    renderIntro()
-    buildAccuseList()
-    renderEvidenceBoard()
 }
 
 
@@ -129,45 +113,21 @@ document.getElementById("begin-investigation-btn").addEventListener("click", asy
     }
 })
 
-//show case intro
-renderIntro()
-// SHOW CASE INTRO (title, summary, crime facts)
-const renderIntro = () => {
-    document.getElementById("case-title").textContent = caseData.title
-    document.getElementById("case-summary").textContent = caseData.summary
-
-    const factsList = document.getElementById("case-facts")
-    factsList.innerHTML = ""
-    caseData.crimeFacts.forEach(fact => {
-        const li = document.createElement("li")
-        li.textContent = fact
-        factsList.appendChild(li)
-    })
-}
-
-
 // LOAD CASE WHEN PAGE OPENS
 loadCase()
 
 // BUILD ACCUSE PAGE RADIO BUTTONS
 const buildAccuseList = () => {
-    const list = document.getElementById("accuse-list")
-    list.innerHTML = ""
-    caseData.suspects.forEach(s => {
-        const label = document.createElement("label")
-        label.className = "suspect-option"
-        label.innerHTML = `
-            <input type="radio" name="accusation" value="${s.id}">
-            <div>
-                <strong>s.name</strong>-{s.name}</strong> -s.name</strong>-{s.role}
-                <p>${s.background}</p>
-                <p><em>Alibi:</em> ${s.alibi}</p>
-            </div>
-        `
-        list.appendChild(label)
-    })
-}
+    const list = document.getElementById("accuse-suspect-list")
+    if (!list) return
 
+    list.innerHTML = suspects.map(s => `
+        <label class="accuse-option">
+            <input type="radio" name="accusation" value="${s.id}">
+            <span>${s.name}</span>
+        </label>
+    `).join("")
+}
 
 
 
@@ -184,10 +144,7 @@ document.getElementById("submit-accusation-btn").addEventListener("click", async
         return
     }
     errorBox.classList.add("hidden")
-
-
-    const CULPRIT_ID = caseData.solution.culpritId //dana
-    const correct = chosen.value === CULPRIT_ID
+    
 
    // calculate time cuz nith hasnt done the timer yet
    const elapsed = typeof startTime === "number"
@@ -214,7 +171,7 @@ document.getElementById("submit-accusation-btn").addEventListener("click", async
         correct ? "Case Solved!" : "Wrong Accusation"
     document.getElementById("accuse-result-text").textContent = correct
         ? "Great detective work!"
-        : `The real culprit was suspect number ${caseData.solution.culpritName}.`
+        : `The real culprit was suspect number ${caseData.culpritId}.`
 
     resultBox.scrollIntoView({ behavior: "smooth" })
 })
@@ -240,32 +197,40 @@ const renderEvidenceBoard = () => {
     const board = document.getElementById("evidence-board")
     board.innerHTML = ""   // clear and rebuild — this is the "no reload" trick
 
-    const allClues = [...caseData.starterClues, ...caseData.quizClues]
-    document.getElementById("evidence-counter").textContent = 
-      `Evidence board: ${collectedClues.length} of ${allClues.length} clues found`
+      
 
-    const visible = allClues.filter(c => collectedClues.includes(c.id))
-    visible.forEach (clue => {
+    const allClues = caseData.clues
+    allClues.sort((a, b) => a.id - b.id)   // assumes caseData has a clues array
+
+    allClues.forEach((clue) => {
         const card = document.createElement("div")
-        card.className = "clue-card"
-        card.innerHTML = `
-            <h3>${clue.title}</h3>
-            <p>${clue.text}</p>
-            ${clue.mission ? `<span class="clue-tag">Misson${clue.mission}</span>` : `<span class="clue-tag">Starting clue</span>`}
-        `
+
+        // Is this clue collected? (check against collectedClues)
+        const isFound = collectedClues.some(c => c.id === clue.id)
+
+        card.className = "clue-card" + (isFound ? "" : " locked")
+
+        if (isFound) {
+            card.innerHTML = `
+                <h3>${clue.title}</h3>
+                <p>${clue.text}</p>
+                <p>Related suspect: ${clue.relatedSuspect}</p>
+            `
+        } else {
+            card.innerHTML = `
+                <h3>${clue.title}</h3>
+                <p>Locked. Complete a mission to unlock.</p>
+            `
+        }
         board.appendChild(card)
     })
 
-    if (visible.length === 0) {
-        board.innerHTML = "<p>No clues found yet. Keep investigating!</p>"
-    }
-
-      
-
-   
+    // update the counter: "3 of 5 clues found"
+    document.getElementById("evidence-counter").textContent =
+        `Evidence board: ${collectedClues.length} of ${allClues.length} clues found`
 }
 
-document.getElementById("go-to-missions-btn").addEventListener("click", () => {
+document.getElementById("go-to0missions-btn").addEventListener("click", () => {
     showDashboardSection("missions-section")
     closeEvidenceDrawer()
 })

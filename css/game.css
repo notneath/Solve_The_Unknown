@@ -305,7 +305,7 @@
 }
 
 /* ---------- Evidence drawer (position and look only) ---------- */
- .evidence-drawer {
+/* .evidence-drawer {
     position: fixed;
     top: 0;
     right: -400px;
@@ -340,7 +340,7 @@
 
 .drawer-overlay.open {
     display: block;
-} 
+} */
 
 
 .clue-card {
