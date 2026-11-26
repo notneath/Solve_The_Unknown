@@ -218,7 +218,7 @@ const renderEvidenceBoard = () => {
             if (clue.found) {
                 card.innerHTML = `<h4>${clue.title}</h4><p>${clue.text}</p>`
             } else {
-                card.innerHTML = `<h4>🔒 Clue locked</h4><p>Complete Mission ${clue.mission} to unlock.</p>`
+                card.innerHTML = `<h4>Clue locked</h4><p>Complete Mission ${clue.mission} to unlock.</p>`
             }
             board.appendChild(card)
         })
@@ -306,7 +306,8 @@ const submitAccusation = async () => {
         resultBox.className = "win"
         resultBox.innerHTML = `<h3> Correct! ${caseData.solution.culpritName} did it!</h3>
             <p>${caseData.solution.howItHappened}</p>
-            <ul>${caseData.solution.explanation.map(e => `<li>${e}</li>`).join("")}</ul>`
+            <ul>${caseData.solution.explanation.map(e => `<li>${e}</li>`).join("")}</ul>
+            <button id="restart-btn" class="secondary-btn">Restart Game</button>`
         submitBtn.disabled = true
         // save score (Member 1's API)
         const progressId = sessionStorage.getItem("progressId")
@@ -326,7 +327,8 @@ const submitAccusation = async () => {
         if (attemptsLeft <= 0) {
             resultBox.className = "lose"
             resultBox.innerHTML = `<h3>❌ Out of attempts!</h3>
-                <p>It was ${caseData.solution.culpritName}. ${caseData.solution.howItHappened}</p>`
+                <p>It was ${caseData.solution.culpritName}. ${caseData.solution.howItHappened}</p>
+                <button id="restart-btn" class="secondary-btn">Restart Game</button>`
             submitBtn.disabled = true
         } else {
             resultBox.className = "wrong"
@@ -338,4 +340,12 @@ const submitAccusation = async () => {
 
 document.getElementById("submit-accusation-btn")
     .addEventListener("click", submitAccusation)
+
+document.getElementById("accuse-result").addEventListener("click", (event) => {
+    if (event.target.id !== "restart-btn") return
+
+    sessionStorage.setItem("attemptsLeft", "3")
+    sessionStorage.removeItem("progressId")
+    window.location.reload()
+})
 
