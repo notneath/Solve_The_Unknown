@@ -3,7 +3,7 @@ const playerData = JSON.parse(sessionStorage.getItem("playerData") || "null")
 
 if (!playerData) {
     window.location.href = "index.html"
-    throw new Error("No player data") // stop the script
+    throw new Error("No player data")
 }
 
 // screen
