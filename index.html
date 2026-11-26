@@ -4,8 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solve the Unknown</title>
+    <link rel="icon" type="image/png" href="image/detective.png">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <h1>HELLOOO</h1>
+    <main class="container">
+        <section id="start-screen" class="screen">
+        <h1>Solve the Unknown</h1>
+        <div class="start-card">
+            <h2>Detective, take the case.</h2>
+            <p class="story">Mr. Patel's famous Sunrise Violin vanished on Concert Night. Four people had the chance. Can you find the thief before time runs out?</p>
+            <!-- Difficulty Section-->
+            <h3>Choose Difficulty</h3>
+            <div class="difficulty-mode">
+                <button id="easy-btn" class="difficulty-btn active">Easy</button>
+                <button id="medium-btn" class="difficulty-btn">Medium</button>
+                <button id="hard-btn" class="difficulty-btn">Hard</button>
+            </div>
+            <!-- Game Mode -->
+            <h3>Choose Game Mode</h3>
+            <div class="mode-buttons">
+                <button id="solo-btn" class="mode-btn active">Solo</button>
+                <button id="team-btn" class="mode-btn">Team</button>
+            </div>
+            <!-- Player Name -->
+            <div class="form-group">
+                <label for="player-name">Your Name or Team Name</label>
+                <input type="text" id="player-name" placeholder="Enter your name or team name">
+            </div>
+            <!-- Teammate Names -->
+            <div class="form-group" id="teammate-group">
+                <label for="teammate-names">Teammate Names (team mode only)</label>
+                <input type="text" id="teammate-names" placeholder="Enter names separated by commas">
+            </div>
+            <!-- Navigation Buttons -->
+            <button id="open-case-btn" class="main-btn">Open the case file</button>
+            <button id="leaderboard-btn" class="secondary-btn">Leaderboard</button>
+        </div>
+        </section>
+
+    </main>
+
+    <script src="js/main.js"></script>
+
 </body>
 </html>
