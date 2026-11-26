@@ -1,4 +1,4 @@
-// ================= CONFIG / STATE =================
+// start
 const playerData = JSON.parse(sessionStorage.getItem("playerData") || "null")
 
 if (!playerData) {
@@ -12,7 +12,7 @@ let CULPRIT_ID = null
 let startTime = null
 const collectedClues = []
 
-// ================= SCREENS =================
+//screen
 const caseScreen = document.getElementById("case-screen")
 const dashboardScreen = document.getElementById("dashboard-screen")
 
@@ -23,7 +23,7 @@ document.getElementById("back-btn").addEventListener("click", () => {
     window.location.href = "index.html"
 })
 
-// ================= SECTION SWITCHING =================
+// section switching
 const showDashboardSection = (sectionId, button) => {
     const target = document.getElementById(sectionId)
     if (!target) {
@@ -42,7 +42,7 @@ document.querySelectorAll(".tab-btn[data-section]").forEach(button => {
     button.addEventListener("click", () => showDashboardSection(button.dataset.section, button))
 })
 
-// ================= SUSPECTS / ACCUSE LIST =================
+// suspect accuse list
 const displaySuspects = () => {
     const container = document.getElementById("suspect-list")
     if (!container || !caseData) return
@@ -67,7 +67,7 @@ const buildAccuseList = () => {
     `).join("")
 }
 
-// ================= EVIDENCE BOARD =================
+// evidence
 const renderEvidenceBoard = () => {
     const board = document.getElementById("evidence-board")
     if (!board || !caseData) return
@@ -96,7 +96,7 @@ const renderEvidenceBoard = () => {
         `Evidence board: collectedClues.lengthof{collectedClues.length} ofcollectedClues.lengthof{allClues.length} clues found`
 }
 
-// ================= EVIDENCE DRAWER =================
+// evidence drawer
 // go-to buttons inside the evidence section
 const on = (id, event, fn) => {
     const el = document.getElementById(id)
@@ -112,7 +112,7 @@ on("ready-to-accuse-btn", "click", () =>
         document.querySelector('[data-section="accuse-section"]')))
 
 
-// ================= CASE LOADING =================
+// case loading
 const loadCase = async () => {
     try {
         caseData = await getCase(1)
@@ -126,7 +126,7 @@ const loadCase = async () => {
     }
 }
 
-// ================= BEGIN INVESTIGATION (single handler) =================
+//begin investigation
 const beginInvestigation = async () => {
     caseScreen.classList.add("hidden")
     dashboardScreen.classList.remove("hidden")
@@ -149,7 +149,7 @@ const beginInvestigation = async () => {
 document.getElementById("begin-investigation-btn")
     .addEventListener("click", beginInvestigation) // only ONE listener now
 
-// ================= SUBMIT ACCUSATION =================
+//submit accusation
 document.getElementById("submit-accusation-btn").addEventListener("click", async () => {
     const chosen = document.querySelector('input[name="accusation"]:checked')
     const reasoning = document.getElementById("accuse-reasoning").value.trim()
@@ -198,7 +198,7 @@ document.getElementById("submit-accusation-btn").addEventListener("click", async
     resultBox.scrollIntoView({ behavior: "smooth" })
 })
 
-// ================= RESTART / LEADERBOARD =================
+//restart leaderboard
 document.getElementById("restart-btn").addEventListener("click", async () => {
     try {
         if (progressId !== null) await deleteProgress(progressId)
