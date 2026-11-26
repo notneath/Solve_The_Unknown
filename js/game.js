@@ -1,127 +1,65 @@
-// GET PLAYER INFORMATION
+// ================= CONFIG / STATE =================
 const playerData = JSON.parse(sessionStorage.getItem("playerData") || "null")
 
-// CHECK PLAYER DATA
 if (!playerData) {
     window.location.href = "index.html"
+    throw new Error("No player data") // stop script execution
 }
-// GET SCREENS
+
+let caseData = null
+let progressId = null
+let CULPRIT_ID = null
+let startTime = null
+const collectedClues = []
+
+// ================= SCREENS =================
 const caseScreen = document.getElementById("case-screen")
 const dashboardScreen = document.getElementById("dashboard-screen")
-// BACK TO START
+
+document.getElementById("dashboard-summary").textContent =
+    `Welcome playerData.name!Difficulty:{playerData.name}! Difficulty:playerData.name!Difficulty:{playerData.difficulty}`
 
 document.getElementById("back-btn").addEventListener("click", () => {
-        window.location.href = "index.html"
+    window.location.href = "index.html"
 })
-// DISPLAY PLAYER INFORMATION
-if (playerData) {
-    document.getElementById("dashboard-summary").textContent = `Welcome ${playerData.name}! Difficulty: ${playerData.difficulty}`
-}
 
-// SWITCH DASHBOARD SECTIONS
+// ================= SECTION SWITCHING =================
 const showDashboardSection = (sectionId, button) => {
     const target = document.getElementById(sectionId)
-
     if (!target) {
         console.warn(`Section not found: ${sectionId}`)
         return
     }
 
-    document.querySelectorAll(".dashboard-section")
-        .forEach(section => section.classList.add("hidden"))
-
+    document.querySelectorAll(".dashboard-section").forEach(s => s.classList.add("hidden"))
     target.classList.remove("hidden")
 
-    document.querySelectorAll(".tab-btn")
-        .forEach(btn => btn.classList.remove("active"))
-
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"))
     if (button) button.classList.add("active")
 }
-// NAVIGATION BUTTONS
+
 document.querySelectorAll(".tab-btn[data-section]").forEach(button => {
-    button.addEventListener("click", () => {
-        showDashboardSection(button.dataset.section, button)
-    })
+    button.addEventListener("click", () => showDashboardSection(button.dataset.section, button))
 })
-// BEGIN INVESTIGATION
-document.getElementById("begin-investigation-btn").addEventListener("click", () => {
-    caseScreen.classList.add("hidden")
-    dashboardScreen.classList.remove("hidden")
 
-    displaySuspects()
-    if (typeof startTimer === "function") startTimer()
-})
-// TIMER FOR MEMBER 3
+// ================= SUSPECTS / ACCUSE LIST =================
+const displaySuspects = () => {
+    const container = document.getElementById("suspect-list")
+    if (!container || !caseData) return
 
-
-
-// EVIDENCE DRAWER
-const evidenceDrawer = document.getElementById("evidence-drawer")
-const drawerOverlay = document.getElementById("drawer-overlay")
-
-// OPEN DRAWER
-document.getElementById("evidence-btn").addEventListener("click", () => {
-        evidenceDrawer.classList.add("open")
-        drawerOverlay.classList.add("open")
-})
-// CLOSE DRAWER
-
-const closeEvidenceDrawer = () => {
-    evidenceDrawer.classList.remove("open")
-    drawerOverlay.classList.remove("open")
+    container.innerHTML = caseData.suspects.map(s => `
+        <div class="suspect-card">
+            <h3>${s.name}</h3>
+            <p>${s.description || ""}</p>
+        </div>
+    `).join("")
 }
 
-document.getElementById("close-evidence-btn").addEventListener("click", closeEvidenceDrawer)
-drawerOverlay.addEventListener("click", closeEvidenceDrawer)
-
-// ACCUSE PAGE
-
-let CULPRIT_ID = null
-
-
-// STORE CASE DATA HERE
-let caseData = null
-let progressId = null
-const collectedClues = []
-
-// LOAD THE CASE FROM FRIEND'S API
-const loadCase = async () => {
-    try {
-        caseData = await getCase(1)
-        suspects = caseData.suspects        // refill the array suspects.js uses
-        CULPRIT_ID = caseData.culpritId     // remember who did it
-
-        displaySuspects() 
-        renderEvidenceBoard()               // evidence board (theirs)
-        buildAccuseList()                   // accuse page radio buttons (ours)
-    } catch (err) {
-        console.warn("Could not load case:", err.message)
-    }
-}
-
-
-// START SESSION WHEN INVESTIGATION BEGINS
-document.getElementById("begin-investigation-btn").addEventListener("click", async () => {
-    try {
-        const session = await createProgress({
-            mode: playerData.difficulty,
-            name: playerData.name
-        })
-        progressId = session.id // save the id, needed later
-    } catch (err) {
-        console.warn("Could not start session:", err.message)
-    }
-})
-
-// LOAD CASE WHEN PAGE OPENS
-loadCase()
-
-// BUILD ACCUSE PAGE RADIO BUTTONS
 const buildAccuseList = () => {
     const list = document.getElementById("accuse-suspect-list")
-    if (!list) return
+    if (!list || !caseData) return
 
-    list.innerHTML = suspects.map(s => `
+    list.innerHTML = caseData.suspects.map(s => `
         <label class="accuse-option">
             <input type="radio" name="accusation" value="${s.id}">
             <span>${s.name}</span>
@@ -129,29 +67,114 @@ const buildAccuseList = () => {
     `).join("")
 }
 
+// ================= EVIDENCE BOARD =================
+const renderEvidenceBoard = () => {
+    const board = document.getElementById("evidence-board")
+    if (!board || !caseData) return
+
+    board.innerHTML = ""
+
+    const allClues = [...caseData.clues].sort((a, b) => a.id - b.id)
+
+    allClues.forEach(clue => {
+        const card = document.createElement("div")
+        const isFound = collectedClues.some(c => c.id === clue.id)
+
+        card.className = "clue-card" + (isFound ? "" : " locked")
+
+        card.innerHTML = isFound
+            ? `<h3>${clue.title}</h3>
+               <p>${clue.text}</p>
+               <p>Related suspect: ${clue.relatedSuspect}</p>`
+            : `<h3>${clue.title}</h3>
+               <p>Locked. Complete a mission to unlock.</p>`
+
+        board.appendChild(card)
+    })
+
+    document.getElementById("evidence-counter").textContent =
+        `Evidence board: collectedClues.lengthof{collectedClues.length} ofcollectedClues.lengthof{allClues.length} clues found`
+}
+
+// ================= EVIDENCE DRAWER =================
+// go-to buttons inside the evidence section
+const on = (id, event, fn) => {
+    const el = document.getElementById(id)
+    if (el) el.addEventListener(event, fn)
+}
+
+on("go-to-missions-btn", "click", () =>
+    showDashboardSection("missions-section",
+        document.querySelector('[data-section="missions-section"]')))
+
+on("ready-to-accuse-btn", "click", () =>
+    showDashboardSection("accuse-section",
+        document.querySelector('[data-section="accuse-section"]')))
 
 
+// ================= CASE LOADING =================
+const loadCase = async () => {
+    try {
+        caseData = await getCase(1)
+        CULPRIT_ID = caseData.culpritId
 
-// SUBMIT ACCUSATION
+        displaySuspects()
+        renderEvidenceBoard()
+        buildAccuseList()
+    } catch (err) {
+        console.warn("Could not load case:", err.message)
+    }
+}
+
+// ================= BEGIN INVESTIGATION (single handler) =================
+const beginInvestigation = async () => {
+    caseScreen.classList.add("hidden")
+    dashboardScreen.classList.remove("hidden")
+
+    startTime = Date.now()
+
+    try {
+        const session = await createProgress({
+            mode: playerData.difficulty,
+            name: playerData.name
+        })
+        progressId = session.id
+    } catch (err) {
+        console.warn("Could not start session:", err.message)
+    }
+
+    displaySuspects()
+}
+
+document.getElementById("begin-investigation-btn")
+    .addEventListener("click", beginInvestigation) // only ONE listener now
+
+// ================= SUBMIT ACCUSATION =================
 document.getElementById("submit-accusation-btn").addEventListener("click", async () => {
     const chosen = document.querySelector('input[name="accusation"]:checked')
     const reasoning = document.getElementById("accuse-reasoning").value.trim()
     const errorBox = document.getElementById("accuse-error")
+    const resultBox = document.getElementById("accuse-result")
 
-    // CHECK BOTH FIELDS
+    // can't accuse without a loaded case
+    if (!caseData || progressId === null) {
+        alert("Case is still loading — try again in a moment.")
+        return
+    }
+
     if (!chosen || !reasoning) {
         errorBox.classList.remove("hidden")
         return
     }
     errorBox.classList.add("hidden")
-    
 
-   // calculate time cuz nith hasnt done the timer yet
-   const elapsed = typeof startTime === "number"
+    // THE FIX: actually compare the chosen suspect to the culprit
+    const correct = Number(chosen.value) === Number(CULPRIT_ID)
+
+    const elapsed = startTime
         ? Math.floor((Date.now() - startTime) / 60000)
         : 0
 
-    // SAVE RESULT TO FRIEND'S API
     try {
         await saveResult(progressId, {
             score: correct ? 100 : 0,
@@ -162,80 +185,32 @@ document.getElementById("submit-accusation-btn").addEventListener("click", async
         console.warn("Could not save result:", err.message)
     }
 
-    // SHOW RESULT BOX
-    const resultBox = document.getElementById("accuse-result")
     resultBox.classList.remove("hidden", "correct", "wrong")
     resultBox.classList.add(correct ? "correct" : "wrong")
 
     document.getElementById("accuse-result-title").textContent =
         correct ? "Case Solved!" : "Wrong Accusation"
+
     document.getElementById("accuse-result-text").textContent = correct
         ? "Great detective work!"
-        : `The real culprit was suspect number ${caseData.culpritId}.`
+        : `The real culprit was suspect number ${CULPRIT_ID}.`
 
     resultBox.scrollIntoView({ behavior: "smooth" })
 })
 
-// RESTART GAME
+// ================= RESTART / LEADERBOARD =================
 document.getElementById("restart-btn").addEventListener("click", async () => {
     try {
-        await deleteProgress(progressId)
+        if (progressId !== null) await deleteProgress(progressId)
     } catch (err) {
         console.warn(err.message)
     }
     window.location.reload()
 })
 
-// SAVE TO LEADERBOARD
 document.getElementById("save-leaderboard-btn").addEventListener("click", () => {
-    alert("Leaderboard coming soon!")  // placeholder until Member 4's part is ready
+    alert("Leaderboard coming soon!")
 })
 
-// ================= EVIDENCE BOARD =================
-
-const renderEvidenceBoard = () => {
-    const board = document.getElementById("evidence-board")
-    board.innerHTML = ""   // clear and rebuild — this is the "no reload" trick
-
-      
-
-    const allClues = caseData.clues
-    allClues.sort((a, b) => a.id - b.id)   // assumes caseData has a clues array
-
-    allClues.forEach((clue) => {
-        const card = document.createElement("div")
-
-        // Is this clue collected? (check against collectedClues)
-        const isFound = collectedClues.some(c => c.id === clue.id)
-
-        card.className = "clue-card" + (isFound ? "" : " locked")
-
-        if (isFound) {
-            card.innerHTML = `
-                <h3>${clue.title}</h3>
-                <p>${clue.text}</p>
-                <p>Related suspect: ${clue.relatedSuspect}</p>
-            `
-        } else {
-            card.innerHTML = `
-                <h3>${clue.title}</h3>
-                <p>Locked. Complete a mission to unlock.</p>
-            `
-        }
-        board.appendChild(card)
-    })
-
-    // update the counter: "3 of 5 clues found"
-    document.getElementById("evidence-counter").textContent =
-        `Evidence board: ${collectedClues.length} of ${allClues.length} clues found`
-}
-
-document.getElementById("go-to0missions-btn").addEventListener("click", () => {
-    showDashboardSection("missions-section")
-    closeEvidenceDrawer()
-})
-
-document.getElementById("ready-to-accuse-btn").addEventListener("click", () => {
-    showDashboardSection("accuse-section")
-    closeEvidenceDrawer()
-})
+// ================= INIT =================
+loadCase()
