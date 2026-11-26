@@ -88,7 +88,7 @@ const displaySuspects = () => {
         name.textContent = suspect.name
 
         const occupation = document.createElement("p")
-        occupation.textContent = suspect.occupation
+        occupation.textContent = suspect.occupation || suspect.role
 
         const motive = document.createElement("p")
         motive.textContent = suspect.motive
@@ -113,7 +113,7 @@ const viewSuspect = (id) => {
     )
 
     document.getElementById("profile-name").textContent = suspect.name
-    document.getElementById("profile-role").textContent = suspect.occupation
+    document.getElementById("profile-role").textContent = suspect.occupation || suspect.role
     document.getElementById("profile-background").textContent = suspect.background
     document.getElementById("profile-evidence").textContent = suspect.evidence
     document.getElementById("profile-motive").textContent = suspect.motive
