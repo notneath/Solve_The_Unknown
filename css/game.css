@@ -228,6 +228,51 @@
     color: #fff;
 }
 
+/*evidence */ 
+/* Evidence page */
+#evidence-section h2 {
+    margin-bottom: 4px;
+}
+
+#evidence-counter {
+    color: #6b6b5d;
+    margin-bottom: 20px;
+}
+
+/* grid of clue cards */
+#evidence-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.clue-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-left: 5px solid #2a6f3c;
+    border-radius: 10px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.clue-card h4 {
+    margin: 0 0 8px;
+}
+
+.clue-card p {
+    margin: 0;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* locked clues look visibly "locked" */
+.clue-card.locked {
+    border-left-color: #c9a227;
+    background: #faf7ec;
+    opacity: 0.85;
+}
+
+
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {

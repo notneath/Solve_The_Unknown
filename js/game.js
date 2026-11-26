@@ -226,7 +226,14 @@ const renderEvidenceBoard = () => {
         const total = allClues.length
         counter.textContent = `${collectedClues.length} of ${total} clues found`
     }
+
+   
+
     renderAccuseClueList()
+
+
+
+
 }
 
 const renderAccuseClueList = () => {
