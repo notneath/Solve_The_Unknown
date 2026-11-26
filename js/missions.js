@@ -373,3 +373,4 @@ document.addEventListener("clue:unlocked", function (event) {
   item.textContent = event.detail.clue.text;
   find("clues").appendChild(item);
 });
+
