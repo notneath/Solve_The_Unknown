@@ -48,7 +48,7 @@
                     <span id="timer">Time 05:00</span>
                     <span id="missions-count">Missions 3 left</span>
                 </div>
-                <button id="evidence-btn">Evidence (2)</button>
+                <button class="tab-btn" data-section="evidence-section">Evidence</button>
 </header>
             <nav class="game-navigation">
                 <button class="tab-btn active" data-section="case-section">Case File</button>
@@ -130,11 +130,42 @@
 
             <!-- Accuse -->
             <div id="accuse-section" class="dashboard-section hidden">
-                <h2>Accuse</h2>
-                <p>Choose who you think is responsible.</p>
+                <div class="accuse-layout">
+                    <div class="dashboard-panel">
+                        <h2>Who did it?</h2>
+
+                        <div id="accuse-error" class="hidden">Please pick a suspect and write your reasoning</div>
+
+                        <div id="accuse-suspect-list" class="accuse-grid">
+                            <!-- JavaScript generates suspect cards for accusation here -->
+                        </div>
+
+                        <label for="accuse-reasoning" class="accuse-reasoning-label">Reasoning: </label>
+                        <textarea id="accuse-reasoning" class="accuse-textarea" placeholder="Explain your reasoning for accusing this suspect..."></textarea>
+                        <button id="submit-accusation-btn" class="main-btn">Submit Accusation</button>
+                    </div>
+                    <div class="dashboard-panel accuse-clues-panel">
+                        <h3>Your clues</h3>
+                        <div id="accuse-clue-list">
+                            <!-- JavaScript generates clue cards here -->
+                        </div>
+                        <p class="accuse-hint">Review before you submit</p>
+                    </div>
+                          <!--Result-->
+                    <div id="accuse-result" class="accuse-result hidden">
+                       <h2 id="accuse-result-title">Result</h2>
+                       <p id="accuse-result-text"></p>
+                       <p class="accuse-score" id="accuse-score"></p>
+                       <button id="save-leaderboard-btn" class="main-btn">Save to Leaderboard</button>
+                       <button id="restart-btn" class="secondary-btn">Restart Game</button>
+                    </div>
+                </div>
+
+                    
+
             </div>
             <!-- Evidence Drawer -->
-            <aside id="evidence-drawer" class="evidence-drawer">
+            <!-- <aside id="evidence-drawer" class="evidence-drawer">
                 <div class="drawer-header">
                     <h2>Evidence (<span id="evidence-count">0</span>)</h2>
                     <button id="close-evidence-btn">Close</button>
@@ -144,12 +175,23 @@
                 <p class="loading-message">No evidence yet.</p>
                 </div>
 
-            </aside>
+            </aside> -->
             <!-- Evidence Drawer Overlay -->
-            <div
+            <!-- <div
                 id="drawer-overlay"
                 class="drawer-overlay">
-            </div>
+            </div> -->
+
+            <!-- evidence page -->
+
+            <section id="evidence-section" class="dashboard-section hidden">
+              <h2>Evidence</h2>
+              <p id="evidence-counter"></p>
+              <div id="evidence-board"></div>
+              <button id="go-to-missions-btn">Go to Mission</button>
+              <button id="ready-to-accuse-btn">Ready to Accuse</button>
+
+            </section>
         </section>
 
     </main>
