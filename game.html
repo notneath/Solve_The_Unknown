@@ -130,9 +130,29 @@
 
             <!-- Accuse -->
             <div id="accuse-section" class="dashboard-section hidden">
-                <h2>Accuse</h2>
-                <p>Choose who you think is responsible.</p>
-            </div>
+                <div class="accuse-layout">
+                    <div class="dashboard-panel">
+                        <h2>Who did it?</h2>
+
+                        <div id="accuse-error" class="hidden">Please pick a suspect and write your reasoning</div>
+
+                        <div id="accuse-suspect-list" class="accuse-grid">
+                            <!-- JavaScript generates suspect cards for accusation here -->
+                        </div>
+
+                        <label for="accuse-reasoning" class="accuse-reasoning-label">Reasoning: </label>
+                        <textarea id="accuse-reasoning" class="accuse-textarea" placeholder="Explain your reasoning for accusing this suspect..."></textarea>
+                        <button id="submit-accusation-btn" class="main-btn">Submit Accusation</button>
+                    </div>
+                    <div class="dashboard-panel accuse-clues-panel">
+                        <h3>Your clues</h3>
+                        <div id="accuse-clue-list">
+                            <!-- JavaScript generates clue cards here -->
+                        </div>
+                        <p class="accuse-hint">Review before you submit</p>
+                    </div>
+
+                </div>
             <!-- Evidence Drawer -->
             <aside id="evidence-drawer" class="evidence-drawer">
                 <div class="drawer-header">
