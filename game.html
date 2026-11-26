@@ -23,14 +23,15 @@
                 </p>
                 <hr>
                 <h3>Initial Clues</h3>
-                <div class="clue">
+                <div id="starter-clues"></div>
+                <!-- <div class="clue">
                     <h4>Clue 01</h4>
                     <p>A mysterious note was discovered.</p>
                 </div>
                 <div class="clue">
                     <h4>Clue 02</h4>
                     <p>The incident happened around midnight.</p>
-                </div>
+                </div> -->
                 <div id="status-message"></div>
                 <button id="begin-investigation-btn" class="main-btn">Begin Investigation</button>
                 <button id="back-btn" class="secondary-btn">Back to Start</button>
@@ -60,22 +61,15 @@
                 <div class="case-layout">
                     <div class="dashboard-panel">
                         <h2>Case Summary</h2>
+                        <p id="welcome-message"></p>
                         <div class="summary-placeholder" id="dashboard-summary">The case story will appear here.
                         </div>
-                        <p>Victim:
-                            <span id="summary-victim">Robert Anderson</span>
-                        </p>
-                        <p>
-                            Location: To be discovered
-                        </p>
-                        <p>
-                            Time: Around midnight
-                        </p>
+                        <ul id="crime-facts"></ul>
                     </div>
                     <!-- Victim Information -->
 
                     <div class="dashboard-panel">
-                        <h2>Victim</h2>
+                        <h2>Victim: <span id="victim-name"></span></h2>
                         <img src="https://api.dicebear.com/9.x/adventurer/svg?seed=Robert" class="victim-avatar" alt="Victim portrait">
                         <p id="victim-details">Robert Anderson, age and details.</p>
                     </div>
@@ -88,7 +82,6 @@
                 <p>Review the suspects and investigate their possible involvement in the case.</p>
                 <div id="suspect-list" class="suspect-grid">
 
-                    <!-- JavaScript generates suspect cards here -->
 
                 </div>
 
@@ -99,34 +92,42 @@
                 <div class="dashboard-panel">
                     <img id="profile-avatar" class="profile-avatar" alt="">
                     <h2 id="profile-name"></h2>
-                    <p id="profile-occupation"></p>
+                    <p id="profile-role"></p>
                     <h3>Background</h3>
                     <p id="profile-background"></p>
                     <h3>Evidence</h3>
                     <p id="profile-evidence"></p>
                     <h3>Motive</h3>
                     <p id="profile-motive"></p>
+                    <h3>Alibi</h3>
+                    <p id="profile-alibi"></p>
                 </div>
 
             </div>
 
-            <!-- Mission -->
-            <div id="missions-section" class="dashboard-section hidden">
-                <h2>Investigation Missions</h2>
-                <p>Complete the missions to collect information and uncover the truth.</p>
+
+<!-- Mission -->
+                <div id="missions-section" class="dashboard-section hidden">
+                    <h2>Investigation Missions</h2>
+                    <p>Complete the missions to collect information and uncover the truth.</p>
+
+    <!-- Mission Status -->
                 <div class="dashboard-panel">
-                    <h3>Mission 01</h3>
-                    <span>Pending</span>
-                </div>
-                <div class="dashboard-panel">
-                    <h3>Mission 02</h3>
-                    <span>Pending</span>
-                </div>
-                <div class="dashboard-panel">
-                    <h3>Mission 03</h3>
-                    <span>Pending</span>
-                </div>
+                <div id="status">
+                    <span id="mission-progress">Missions: 0 completed</span>
+                <span id="mission-score">Score: 0</span>
             </div>
+         </div>
+    <!-- Mission Questions -->
+                <div id="mission-list"></div>
+    <!-- Evidence Board -->
+                <div class="dashboard-panel">
+                    <h3>Evidence Board</h3>
+                    <ol id="clues">
+                    </ol>
+                </div>
+        </div>
+
             <!-- Accuse -->
             <div id="accuse-section" class="dashboard-section hidden">
                 <h2>Accuse</h2>
@@ -139,7 +140,6 @@
                     <button id="close-evidence-btn">Close</button>
                 </div>
 
-            <!-- MEMBER 4: render clue entries inside this div -->
                 <div id="evidence-list">
                 <p class="loading-message">No evidence yet.</p>
                 </div>
@@ -156,6 +156,7 @@
     <script src="js/api.js"></script>
     <script src="js/suspects.js"></script>
     <script src="js/game.js"></script>
+    <script src="js/missions.js"></script>
 
 </body>
 </html>

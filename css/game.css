@@ -113,6 +113,8 @@
     height: 85px;
     border-radius: 50%;
     object-fit: cover;
+    display: block;
+    margin-bottom: 12px;
 }
 
 /* ---------- Suspects ---------- */
