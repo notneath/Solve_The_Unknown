@@ -258,6 +258,10 @@ const buildAccuseSuspects = () => {
             list.querySelectorAll(".suspect-choice").forEach(choice => choice.classList.remove("selected"))
             button.classList.add("selected")
         })
+
+
+
+    
         list.appendChild(button)
     })
 }
@@ -267,6 +271,10 @@ const submitAccusation = async () => {
     const reasoning = document.getElementById("accuse-reasoning").value.trim()
     const resultBox = document.getElementById("accuse-result")
     const submitBtn = document.getElementById("submit-accusation-btn")
+    
+    
+
+    
 
     if (!suspectId) {
         resultBox.className = "wrong"

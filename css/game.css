@@ -206,6 +206,29 @@
     display: block;
 }
 
+
+
+/*accuse*/
+
+.suspect-btn {
+    border: 2px solid #333;
+    border-radius: 8px;
+    padding: 10px 16px;
+    background: #fff;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.suspect-btn:hover {
+    background: #f0ede6;
+}
+
+.suspect-btn.selected {
+    background: #333;
+    color: #fff;
+}
+
+
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
     .suspect-grid {
